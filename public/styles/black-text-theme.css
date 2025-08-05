@@ -1,0 +1,246 @@
+/* Black Text Theme - Convert all gray text to black */
+
+/* Override gray color values */
+body,
+p,
+span,
+div,
+li,
+td,
+th,
+label,
+small,
+.text-muted,
+.text-secondary,
+.text-gray {
+    color: #000000 !important;
+}
+
+/* Specific gray color replacements */
+.testimonial-text,
+.author-role,
+.stat-label,
+.feature-item p,
+.pricing-card p,
+.plan-description,
+.plan-features li,
+.pricing-note p,
+.legal-section p,
+.legal-section li,
+.faq-item p,
+.contact-item p,
+.email-desc,
+.response-time,
+.prompt-meta,
+.prompt-status,
+.empty-state p,
+.pagination .page-info,
+.filter-label,
+.modal-description,
+.subscription-info p,
+.billing-info,
+.invoice-item,
+.feedback-meta,
+.testimonial-author span,
+.preview-warning,
+.editor-status,
+.dashboard-stat p,
+.app-meta,
+.menu-item span {
+    color: #000000 !important;
+}
+
+/* Form elements */
+input,
+textarea,
+select,
+.form-control,
+.form-label,
+.form-helper {
+    color: #000000 !important;
+}
+
+/* Placeholder text - slightly lighter black */
+::placeholder {
+    color: #333333 !important;
+    opacity: 1 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #333333 !important;
+    opacity: 1 !important;
+}
+
+/* Links - keep them distinguishable */
+a:not(.btn):not(.btn-primary):not(.btn-secondary) {
+    color: #0066cc !important;
+}
+
+a:not(.btn):hover {
+    color: #0052a3 !important;
+}
+
+/* Navigation links */
+.nav-link,
+.footer-link {
+    color: #000000 !important;
+}
+
+.nav-link:hover,
+.footer-link:hover {
+    color: #333333 !important;
+}
+
+/* Buttons */
+.btn-outline {
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+.btn-outline:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+.btn-secondary {
+    color: #000000 !important;
+    background-color: #f0f0f0 !important;
+    border-color: #cccccc !important;
+}
+
+/* Tables */
+table th,
+table td {
+    color: #000000 !important;
+}
+
+/* Override specific gray hex values */
+[style*="color: #718096"],
+[style*="color: #666"],
+[style*="color: #6b7280"],
+[style*="color: #64748b"],
+[style*="color: #92400e"],
+[style*="color: #991b1b"],
+[style*="color: #856404"],
+[style*="color: #cbd5e0"],
+[style*="color: #d1d5db"],
+[style*="color: #e2e8f0"],
+[style*="color: #e5e7eb"],
+[style*="color: #f7fafc"],
+[style*="color: #f3f4f6"],
+[style*="color: #374151"],
+[style*="color: #1f2937"] {
+    color: #000000 !important;
+}
+
+/* Keep white text on dark backgrounds */
+.btn-primary,
+.btn-primary *,
+.auth-sidebar,
+.auth-sidebar *,
+.legal-cta,
+.legal-cta *,
+.hero,
+.hero *,
+[style*="background: linear-gradient"][style*="667eea"],
+[style*="background: linear-gradient"][style*="667eea"] *,
+[style*="background: linear-gradient"][style*="764ba2"],
+[style*="background: linear-gradient"][style*="764ba2"] *,
+.dark-bg,
+.dark-bg *,
+.bg-dark,
+.bg-dark * {
+    color: white !important;
+}
+
+/* Keep error and success colors */
+.text-error,
+.text-danger,
+.alert-error,
+.error {
+    color: #dc3545 !important;
+}
+
+.text-success,
+.alert-success,
+.success {
+    color: #28a745 !important;
+}
+
+.text-warning,
+.alert-warning,
+.warning {
+    color: #ffc107 !important;
+}
+
+.text-info,
+.alert-info,
+.info {
+    color: #17a2b8 !important;
+}
+
+/* Keep brand colors */
+.brand-text,
+.logo-text,
+.nav-brand,
+.text-primary {
+    color: #667eea !important;
+}
+
+/* Pricing section specific */
+.plan-description,
+.plan-credits span,
+.plan-highlights p,
+.plan-highlights li span,
+.price-period {
+    color: #000000 !important;
+}
+
+/* Testimonials specific */
+.testimonial-text {
+    color: #000000 !important;
+}
+
+.author-role {
+    color: #000000 !important;
+}
+
+/* About section stats */
+.stat-label {
+    color: #000000 !important;
+}
+
+/* Contact section */
+.email-desc,
+.response-time {
+    color: #000000 !important;
+}
+
+/* Footer */
+.footer p,
+.footer-bottom p {
+    color: #000000 !important;
+}
+
+/* Dark mode override - force black text where appropriate */
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-gray {
+    color: #000000 !important;
+}
+
+/* Ensure readability */
+.card,
+.modal,
+.dropdown-menu,
+.tooltip {
+    background-color: white !important;
+}
+
+.card *,
+.modal *,
+.dropdown-menu *,
+.tooltip * {
+    color: #000000 !important;
+}
