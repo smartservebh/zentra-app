@@ -1,0 +1,19 @@
+name = "zentra-app"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = "./public"
+
+[build]
+command = "npm run build"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[env.production]
+vars = { 
+  FRONTEND_URL = "https://zentrahub.pro",
+  API_URL = "https://api.zentrahub.pro"
+}

@@ -1,0 +1,143 @@
+/* Contact Section Styles */
+
+.contact-section {
+    padding: 80px 0;
+    background: #ffffff;
+    text-align: center;
+}
+
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-icon {
+    font-size: 4rem;
+    margin-bottom: 30px;
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 20px;
+}
+
+.contact-section > .container > .contact-content > p {
+    font-size: 1.1rem;
+    color: #718096;
+    margin-bottom: 40px;
+}
+
+/* Email Items */
+.contact-emails {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.email-item {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.email-item:hover {
+    background: #f1f3f5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.email-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.email-icon {
+    font-size: 1.5rem;
+}
+
+.email-address {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #667eea;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover .email-address {
+    color: #5a67d8;
+}
+
+.email-desc {
+    font-size: 0.95rem;
+    color: #718096;
+    margin: 0;
+}
+
+.response-time {
+    font-size: 1rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+/* RTL Support */
+[dir="rtl"] .email-link {
+    flex-direction: row-reverse;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 20px;
+    }
+    
+    .contact-icon {
+        font-size: 3rem;
+    }
+    
+    .contact-section h2 {
+        font-size: 2rem;
+    }
+    
+    .email-address {
+        font-size: 1rem;
+    }
+    
+    .email-item {
+        padding: 20px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .contact-section {
+        background: #2d3748;
+    }
+    
+    .contact-section h2 {
+        color: #f7fafc;
+    }
+    
+    .contact-section > .container > .contact-content > p,
+    .email-desc {
+        color: #cbd5e0;
+    }
+    
+    .email-item {
+        background: #1a202c;
+    }
+    
+    .email-item:hover {
+        background: #2d3748;
+    }
+    
+    .response-time {
+        color: #cbd5e0;
+    }
+}

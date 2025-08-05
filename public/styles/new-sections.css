@@ -1,0 +1,394 @@
+/* New Sections Styles */
+
+/* Modern Pricing Section */
+.pricing-modern {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+.pricing-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.pricing-card-modern {
+    background: white;
+    border-radius: 16px;
+    padding: 40px 30px;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.pricing-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card-modern.recommended {
+    border: 2px solid #3b82f6;
+    transform: scale(1.05);
+}
+
+.pricing-card-modern.recommended:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #3b82f6;
+    color: white;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.pricing-card-modern .plan-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.pricing-card-modern .price {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 30px;
+}
+
+.pricing-card-modern .currency {
+    font-size: 1.25rem;
+    color: #64748b;
+    margin-right: 4px;
+}
+
+.pricing-card-modern .amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.pricing-card-modern .period {
+    font-size: 1rem;
+    color: #64748b;
+    margin-left: 4px;
+}
+
+.plan-credits {
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.credit-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.credit-item:last-child {
+    margin-bottom: 0;
+}
+
+.credit-number {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3b82f6;
+}
+
+.credit-label {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.pricing-card-modern .plan-features {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.pricing-card-modern .plan-features li {
+    padding: 10px 0;
+    color: #475569;
+    display: flex;
+    align-items: center;
+}
+
+.pricing-card-modern .plan-features li::before {
+    content: "✓";
+    color: #10b981;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.btn-outline-modern {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 24px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    color: #1e293b;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-outline-modern:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #eff6ff;
+}
+
+.btn-primary-modern {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 24px;
+    background: #3b82f6;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary-modern:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Ready to Use Section */
+.ready-to-use {
+    padding: 100px 0;
+    background: white;
+}
+
+.ready-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.ready-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.ready-text p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 30px;
+}
+
+.ready-image svg {
+    width: 100%;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Backend Section */
+.backend-section {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+.backend-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.backend-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.backend-text p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 30px;
+}
+
+.backend-image svg {
+    width: 100%;
+    height: auto;
+}
+
+.backend-image svg g {
+    animation: rotate 4s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 100px 0;
+    background: white;
+    overflow: hidden;
+}
+
+.testimonials-wrapper {
+    position: relative;
+    margin-top: 60px;
+}
+
+.testimonials-slider {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease;
+}
+
+.testimonial-card {
+    min-width: 350px;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.testimonial-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-info {
+    flex: 1;
+}
+
+.testimonial-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.testimonial-handle {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #475569;
+    font-style: italic;
+}
+
+.testimonials-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.testimonial-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.testimonial-dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: #3b82f6;
+}
+
+/* RTL Support */
+[dir="rtl"] .ready-content,
+[dir="rtl"] .backend-content {
+    direction: rtl;
+}
+
+[dir="rtl"] .pricing-card-modern .plan-features li::before {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+[dir="rtl"] .credit-item {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .testimonial-header {
+    flex-direction: row-reverse;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pricing-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .pricing-card-modern.recommended {
+        transform: scale(1);
+    }
+    
+    .ready-content,
+    .backend-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .ready-image,
+    .backend-image {
+        order: -1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .testimonial-card {
+        min-width: 280px;
+    }
+    
+    .ready-text h2,
+    .backend-text h2 {
+        font-size: 2rem;
+    }
+}
+/* Hide testimonial dots for continuous scroll */
+.testimonials-dots {
+    display: none !important;
+}
+
+/* Smooth continuous scroll */
+.testimonials-slider {
+    animation: none;
+    will-change: transform;
+}

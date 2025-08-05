@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Zentra</title>
+    <meta name="description" content="Choose the perfect plan for your app creation needs. Start free and upgrade as you grow.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pricing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="assets/logo.svg" alt="Zentra" class="logo">
+                    <span class="brand-text">Zentra</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html#features" class="nav-link" data-en="Features" data-ar="المميزات">Features</a>
+                <a href="pricing.html" class="nav-link active" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                <a href="index.html#about" class="nav-link" data-en="About" data-ar="حول">About</a>
+                <div class="nav-actions">
+                    <button class="lang-toggle" onclick="zentra.toggleLanguage()">
+                        <span class="lang-text">العربية</span>
+                    </button>
+                    <a href="login.html" class="btn btn-outline" data-en="Login" data-ar="تسجيل الدخول">Login</a>
+                    <a href="register.html" class="btn btn-primary" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pricing-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-en="Simple, Transparent Pricing" data-ar="أسعار بسيطة وشفافة">Simple, Transparent Pricing</h1>
+                <p data-en="Choose the plan that fits your needs. Start free and upgrade as you grow." data-ar="اختر الخطة التي تناسب احتياجاتك. ابدأ مجاناً وقم بالترقية مع نموك.">
+                    Choose the plan that fits your needs. Start free and upgrade as you grow.
+                </p>
+                
+                <!-- Billing Toggle -->
+                <div class="billing-toggle">
+                    <span class="billing-label" data-en="Monthly" data-ar="شهري">Monthly</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="billingToggle" onchange="toggleBilling()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="billing-label" data-en="Yearly" data-ar="سنوي">Yearly</span>
+                    <span class="billing-discount" data-en="Save 20%" data-ar="وفر 20%">Save 20%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing-plans">
+        <div class="container">
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 data-en="Free" data-ar="مجاني">Free</h3>
+                        <p data-en="Perfect for getting started" data-ar="مثالي للبدء">Perfect for getting started</p>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">0</span>
+                            <span class="period" data-en="/month" data-ar="/شهر">/month</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="3 apps per month" data-ar="3 تطبيقات شهرياً">3 apps per month</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Basic AI generation" data-ar="إنشاء أساسي بالذكاء الاصطناعي">Basic AI generation</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Public app sharing" data-ar="مشاركة التطبيقات العامة">Public app sharing</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Community support" data-ar="دعم المجتمع">Community support</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Arabic & English support" data-ar="دعم العربية والإنجليزية">Arabic & English support</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="register.html" class="btn btn-outline btn-full" data-en="Get Started Free" data-ar="ابدأ مجاناً">Get Started Free</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card featured">
+                    <div class="plan-badge" data-en="Most Popular" data-ar="الأكثر شعبية">Most Popular</div>
+                    <div class="plan-header">
+                        <h3 data-en="Pro" data-ar="احترافي">Pro</h3>
+                        <p data-en="For serious creators" data-ar="للمبدعين الجادين">For serious creators</p>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount monthly-price">19</span>
+                            <span class="amount yearly-price" style="display: none;">15</span>
+                            <span class="period" data-en="/month" data-ar="/شهر">/month</span>
+                        </div>
+                        <div class="yearly-note" style="display: none;">
+                            <span data-en="Billed annually ($180/year)" data-ar="يُدفع سنوياً (180 دولار/سنة)">Billed annually ($180/year)</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="50 apps per month" data-ar="50 تطبيق شهرياً">50 apps per month</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Advanced AI generation" data-ar="إنشاء متقدم بالذكاء الاصطناعي">Advanced AI generation</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Custom domains" data-ar="نطاقات مخصصة">Custom domains</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Priority support" data-ar="دعم أولوية">Priority support</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Analytics dashboard" data-ar="لوحة التحليلات">Analytics dashboard</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Export source code" data-ar="تصدير الكود المصدري">Export source code</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Remove Zentra branding" data-ar="إزالة علامة زنترا التجارية">Remove Zentra branding</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="register.html" class="btn btn-primary btn-full" data-en="Start Pro Trial" data-ar="ابدأ التجربة المجانية">Start Pro Trial</a>
+                    <div class="trial-note">
+                        <span data-en="14-day free trial, no credit card required" data-ar="تجربة مجانية لمدة 14 يوماً، لا حاجة لبطاقة ائتمان">14-day free trial, no credit card required</span>
+                    </div>
+                </div>
+
+                <!-- Team Plan -->
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 data-en="Team" data-ar="فريق">Team</h3>
+                        <p data-en="For teams and organizations" data-ar="للفرق والمؤسسات">For teams and organizations</p>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount monthly-price">49</span>
+                            <span class="amount yearly-price" style="display: none;">39</span>
+                            <span class="period" data-en="/month" data-ar="/شهر">/month</span>
+                        </div>
+                        <div class="yearly-note" style="display: none;">
+                            <span data-en="Billed annually ($468/year)" data-ar="يُدفع سنوياً (468 دولار/سنة)">Billed annually ($468/year)</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Unlimited apps" data-ar="تطبيقات غير محدودة">Unlimited apps</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Team collaboration" data-ar="تعاون الفريق">Team collaboration</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="White-label options" data-ar="خيارات العلامة البيضاء">White-label options</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="24/7 priority support" data-ar="دعم أولوية 24/7">24/7 priority support</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Advanced analytics" data-ar="تحليلات متقدمة">Advanced analytics</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="API access" data-ar="وصول API">API access</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Custom integrations" data-ar="تكاملات مخصصة">Custom integrations</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span data-en="Dedicated account manager" data-ar="مدير حساب مخصص">Dedicated account manager</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="btn btn-outline btn-full" onclick="contactSales()" data-en="Contact Sales" data-ar="اتصل بالمبيعات">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="feature-comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Compare Plans" data-ar="مقارنة الخطط">Compare Plans</h2>
+                <p data-en="See what's included in each plan" data-ar="اطلع على ما هو مشمول في كل خطة">See what's included in each plan</p>
+            </div>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-en="Features" data-ar="المميزات">Features</th>
+                            <th data-en="Free" data-ar="مجاني">Free</th>
+                            <th data-en="Pro" data-ar="احترافي">Pro</th>
+                            <th data-en="Team" data-ar="فريق">Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-en="Apps per month" data-ar="التطبيقات شهرياً">Apps per month</td>
+                            <td>3</td>
+                            <td>50</td>
+                            <td data-en="Unlimited" data-ar="غير محدود">Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td data-en="AI Generation" data-ar="الإنشاء بالذكاء الاصطناعي">AI Generation</td>
+                            <td data-en="Basic" data-ar="أساسي">Basic</td>
+                            <td data-en="Advanced" data-ar="متقدم">Advanced</td>
+                            <td data-en="Advanced" data-ar="متقدم">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Custom Domains" data-ar="النطاقات المخصصة">Custom Domains</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Analytics" data-ar="التحليلات">Analytics</td>
+                            <td data-en="Basic" data-ar="أساسي">Basic</td>
+                            <td data-en="Advanced" data-ar="متقدم">Advanced</td>
+                            <td data-en="Advanced" data-ar="متقدم">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Source Code Export" data-ar="تصدير الكود المصدري">Source Code Export</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Team Collaboration" data-ar="تعاون الفريق">Team Collaboration</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td data-en="API Access" data-ar="وصول API">API Access</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Support" data-ar="الدعم">Support</td>
+                            <td data-en="Community" data-ar="المجتمع">Community</td>
+                            <td data-en="Priority" data-ar="أولوية">Priority</td>
+                            <td data-en="24/7 Priority" data-ar="أولوية 24/7">24/7 Priority</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة">Frequently Asked Questions</h2>
+                <p data-en="Get answers to common questions about our pricing and plans" data-ar="احصل على إجابات للأسئلة الشائعة حول أسعارنا وخططنا">Get answers to common questions about our pricing and plans</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-en="Can I change my plan anytime?" data-ar="هل يمكنني تغيير خطتي في أي وقت؟">Can I change my plan anytime?</h3>
+                    <p data-en="Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences." data-ar="نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت. تسري التغييرات فوراً، وسنحسب أي فروق في الفوترة بالتناسب.">
+                        Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-en="What happens if I exceed my app limit?" data-ar="ماذا يحدث إذا تجاوزت حد التطبيقات؟">What happens if I exceed my app limit?</h3>
+                    <p data-en="If you reach your monthly app limit, you'll need to upgrade your plan or wait until the next billing cycle. We'll notify you when you're approaching your limit." data-ar="إذا وصلت إلى حد التطبيقات الشه��ي، ستحتاج إلى ترقية خطتك أو الانتظار حتى دورة الفوترة التالية. سنخطرك عندما تقترب من حدك.">
+                        If you reach your monthly app limit, you'll need to upgrade your plan or wait until the next billing cycle. We'll notify you when you're approaching your limit.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-en="Do you offer refunds?" data-ar="هل تقدمون استرداد الأموال؟">Do you offer refunds?</h3>
+                    <p data-en="We offer a 30-day money-back guarantee for all paid plans. If you're not satisfied, contact our support team for a full refund." data-ar="نقدم ضمان استرداد الأموال لمدة 30 يوماً لجميع الخطط المدفوعة. إذا لم تكن راضياً، اتصل بفريق الدعم للحصول على استرداد كامل.">
+                        We offer a 30-day money-back guarantee for all paid plans. If you're not satisfied, contact our support team for a full refund.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-en="Can I use Zentra for commercial projects?" data-ar="هل يمكنني استخدام زنترا للمشاريع التجارية؟">Can I use Zentra for commercial projects?</h3>
+                    <p data-en="Yes, all plans allow commercial use of the apps you create. Pro and Team plans also allow you to remove Zentra branding." data-ar="نعم، جميع الخطط تسمح بالاستخدام التجاري للتطبيقات التي تنشئها. خطط Pro و Team تسمح أيضاً بإزالة علامة زنترا التجارية.">
+                        Yes, all plans allow commercial use of the apps you create. Pro and Team plans also allow you to remove Zentra branding.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-en="Is there a free trial for paid plans?" data-ar="هل توجد تجربة مجانية للخطط المدفوعة؟">Is there a free trial for paid plans?</h3>
+                    <p data-en="Yes, we offer a 14-day free trial for Pro and Team plans. No credit card required to start your trial." data-ar="نعم، نقدم تجربة مجانية لمدة 14 يوماً لخطط Pro و Team. لا حاجة لبطاقة ائتمان لبدء التجربة.">
+                        Yes, we offer a 14-day free trial for Pro and Team plans. No credit card required to start your trial.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 data-en="What payment methods do you accept?" data-ar="ما طرق الدفع التي تقبلونها؟">What payment methods do you accept?</h3>
+                    <p data-en="We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. For Team plans, we also accept bank transfers." data-ar="نقبل جميع بطاقات الائتمان الرئيسية (فيزا، ماستركارد، أمريكان إكسبريس) وPayPal. لخطط الفريق، نقبل أيضاً التحويلات البنكية.">
+                        We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. For Team plans, we also accept bank transfers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="pricing-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 data-en="Ready to Start Building?" data-ar="مستعد لبدء البناء؟">Ready to Start Building?</h2>
+                <p data-en="Join thousands of creators who are already building amazing apps with Zentra" data-ar="انضم إلى آلاف المبدعين الذين يبنون بالفعل تطبيقات مذهلة مع ز��ترا">
+                    Join thousands of creators who are already building amazing apps with Zentra
+                </p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn btn-primary btn-lg" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</a>
+                    <a href="#" class="btn btn-outline btn-lg" onclick="contactSales()" data-en="Contact Sales" data-ar="اتصل بالمبيعات">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand">
+                        <img src="assets/logo.svg" alt="Zentra" class="logo">
+                        <span class="brand-text">Zentra</span>
+                    </div>
+                    <p data-en="Turn your ideas into apps instantly with AI-powered generation." data-ar="حول أفكارك إلى تطبيقات فوراً مع الإنشاء المدعوم بالذكاء الاصطناعي.">
+                        Turn your ideas into apps instantly with AI-powered generation.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-en="Product" data-ar="المنتج">Product</h4>
+                        <a href="index.html#features" data-en="Features" data-ar="المميزات">Features</a>
+                        <a href="pricing.html" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                        <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                        <a href="#" data-en="Help Center" data-ar="مركز المساعدة">Help Center</a>
+                        <a href="#" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</a>
+                        <a href="#" data-en="API Docs" data-ar="وثائق API">API Docs</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+                        <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                        <a href="refund.html" data-en="Refund Policy" data-ar="سياسة الاسترداد">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zentra. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/pricing.js"></script>
+</body>
+</html>

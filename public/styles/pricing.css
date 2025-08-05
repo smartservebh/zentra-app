@@ -1,0 +1,324 @@
+/* Pricing Section Styles */
+
+.pricing-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.pricing-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.pricing-section .section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 15px;
+}
+
+.pricing-section .section-header p {
+    font-size: 1.1rem;
+    color: #718096;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Reverse order for English (LTR) */
+[dir="ltr"] .pricing-grid {
+    direction: rtl;
+}
+
+[dir="ltr"] .pricing-card {
+    direction: ltr;
+}
+
+/* Pricing Card */
+.pricing-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: #d1d5db;
+}
+
+.pricing-card.popular {
+    border-color: #667eea;
+    background: linear-gradient(to bottom, #ffffff, #f9fafb);
+    box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.1), 0 4px 6px -2px rgba(102, 126, 234, 0.05);
+}
+
+.pricing-card.popular:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 30px -5px rgba(102, 126, 234, 0.15), 0 10px 10px -5px rgba(102, 126, 234, 0.04);
+}
+
+/* Popular Badge */
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #667eea;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Plan Name */
+.plan-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Plan Price */
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 3px;
+    margin-bottom: 20px;
+}
+
+.price-amount {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.price-currency {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #718096;
+}
+
+.price-period {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+/* Plan Description */
+.plan-description {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Plan Credits */
+.plan-credits {
+    background: #f3f4f6;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+}
+
+.pricing-card.popular .plan-credits {
+    background: #ede9fe;
+    border-color: #ddd6fe;
+}
+
+.credit-row {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-bottom: 8px;
+}
+
+.credit-row:last-child {
+    margin-bottom: 0;
+}
+
+.credit-row strong {
+    font-weight: 700;
+    color: #1a202c;
+}
+
+/* Plan Highlights */
+.plan-highlights {
+    margin-top: 20px;
+}
+
+.plan-highlights p {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 10px;
+}
+
+.plan-highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-highlights li {
+    padding: 6px 0;
+    font-size: 0.85rem;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Plan Button */
+.btn-plan {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-plan.btn-outline {
+    background: transparent;
+    border: 2px solid #e2e8f0;
+    color: #4a5568;
+}
+
+.btn-plan.btn-outline:hover {
+    border-color: #667eea;
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.btn-plan.btn-primary {
+    background: #667eea;
+    color: white;
+    border: 2px solid #667eea;
+}
+
+.btn-plan.btn-primary:hover {
+    background: #5a67d8;
+    border-color: #5a67d8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Pricing Note */
+.pricing-note {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.pricing-note p {
+    color: #718096;
+    font-size: 0.95rem;
+}
+
+/* RTL Support */
+[dir="rtl"] .pricing-card {
+    text-align: right;
+}
+
+[dir="rtl"] .credit-row {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .plan-features li {
+    flex-direction: row-reverse;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-section {
+        padding: 60px 20px;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 400px;
+    }
+    
+    .price-amount {
+        font-size: 2rem;
+    }
+    
+    .pricing-section .section-header h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .pricing-section {
+        background: #1a202c;
+    }
+    
+    .pricing-card {
+        background: #2d3748;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .pricing-section .section-header h2,
+    .plan-name,
+    .price-amount {
+        color: #f7fafc;
+    }
+    
+    .pricing-section .section-header p,
+    .price-currency,
+    .price-period,
+    .credit-text,
+    .plan-features li {
+        color: #cbd5e0;
+    }
+    
+    .plan-credits {
+        background: #1a202c;
+    }
+    
+    .btn-plan.btn-outline {
+        border-color: #4a5568;
+        color: #cbd5e0;
+    }
+    
+    .btn-plan.btn-outline:hover {
+        border-color: #667eea;
+        color: #667eea;
+        background: rgba(102, 126, 234, 0.1);
+    }
+    
+    .pricing-note {
+        border-top-color: #4a5568;
+    }
+}

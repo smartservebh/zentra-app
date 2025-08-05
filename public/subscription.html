@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Subscription - Zentra</title>
+    <meta name="description" content="Manage your Zentra subscription and billing">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/subscription.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-text">Zentra</a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                <a href="index.html#features" class="nav-link" data-en="Features" data-ar="المميزات">Features</a>
+                <a href="pricing.html" class="nav-link" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                <div class="nav-actions">
+                    <button class="lang-toggle" onclick="toggleLanguage()">
+                        <span class="lang-text">العربية</span>
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-menu-toggle">
+                            <span class="user-avatar">U</span>
+                            <span class="user-name">User</span>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                            <a href="subscription.html" data-en="Subscription" data-ar="الاشتراك">Subscription</a>
+                            <a href="settings.html" data-en="Settings" data-ar="الإعدادات">Settings</a>
+                            <hr>
+                            <a href="#" onclick="logout()" data-en="Logout" data-ar="تسجيل الخروج">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Subscription Management -->
+    <section class="subscription-section">
+        <div class="container">
+            <div class="subscription-header">
+                <h1 data-en="Manage Subscription" data-ar="إدارة الاشتراك">Manage Subscription</h1>
+                <p data-en="View and manage your plan, billing, and usage" data-ar="عرض وإدارة خطتك والفوترة والاستخدام">View and manage your plan, billing, and usage</p>
+            </div>
+
+            <div class="subscription-content">
+                <!-- Current Plan -->
+                <div class="current-plan-card">
+                    <div class="plan-header">
+                        <h2 data-en="Current Plan" data-ar="الخطة الحالية">Current Plan</h2>
+                        <span class="plan-badge" id="currentPlanBadge">Free</span>
+                    </div>
+                    
+                    <div class="plan-details">
+                        <div class="plan-info">
+                            <div class="info-item">
+                                <span class="info-label" data-en="Status" data-ar="الحالة">Status</span>
+                                <span class="info-value status-active" data-en="Active" data-ar="نشط">Active</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Billing Cycle" data-ar="دورة الفوترة">Billing Cycle</span>
+                                <span class="info-value" id="billingCycle" data-en="N/A" data-ar="غير متاح">N/A</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label" data-en="Next Billing Date" data-ar="تاريخ الفوترة التالي">Next Billing Date</span>
+                                <span class="info-value" id="nextBillingDate" data-en="N/A" data-ar="غير متاح">N/A</span>
+                            </div>
+                        </div>
+
+                        <div class="plan-actions">
+                            <button class="btn btn-primary" onclick="showUpgradeModal()" data-en="Upgrade Plan" data-ar="ترقية الخطة">Upgrade Plan</button>
+                            <button class="btn btn-outline" onclick="showCancelModal()" id="cancelBtn" style="display: none;" data-en="Cancel Subscription" data-ar="إلغاء الاشتراك">Cancel Subscription</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Statistics -->
+                <div class="usage-card">
+                    <h2 data-en="Usage Statistics" data-ar="إحصائيات الاستخدام">Usage Statistics</h2>
+                    
+                    <div class="usage-grid">
+                        <div class="usage-item">
+                            <div class="usage-header">
+                                <span data-en="Message Credits" data-ar="رصيد الرسائل">Message Credits</span>
+                                <span class="usage-count"><span id="messagesUsed">0</span> / <span id="messagesLimit">25</span></span>
+                            </div>
+                            <div class="usage-bar">
+                                <div class="usage-progress" id="messagesProgress" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="usage-item">
+                            <div class="usage-header">
+                                <span data-en="Integration Credits" data-ar="رصيد التكامل">Integration Credits</span>
+                                <span class="usage-count"><span id="integrationsUsed">0</span> / <span id="integrationsLimit">500</span></span>
+                            </div>
+                            <div class="usage-bar">
+                                <div class="usage-progress" id="integrationsProgress" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="usage-item">
+                            <div class="usage-header">
+                                <span data-en="Apps Created" data-ar="التطبيقات المنشأة">Apps Created</span>
+                                <span class="usage-count" id="appsCreated">0</span>
+                            </div>
+                        </div>
+
+                        <div class="usage-item">
+                            <div class="usage-header">
+                                <span data-en="Storage Used" data-ar="المساحة المستخدمة">Storage Used</span>
+                                <span class="usage-count" id="storageUsed">0 MB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="usage-reset">
+                        <p data-en="Credits reset on:" data-ar="إعادة تعيين الرصيد في:">Credits reset on: <span id="resetDate">-</span></p>
+                    </div>
+                </div>
+
+                <!-- Features Comparison -->
+                <div class="features-card">
+                    <h2 data-en="Plan Features" data-ar="ميزات الخطة">Plan Features</h2>
+                    
+                    <div class="features-list" id="featuresList">
+                        <!-- Features will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Billing History -->
+                <div class="billing-card">
+                    <h2 data-en="Billing History" data-ar="سجل الفوترة">Billing History</h2>
+                    
+                    <div class="billing-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-en="Date" data-ar="التاريخ">Date</th>
+                                    <th data-en="Description" data-ar="الوصف">Description</th>
+                                    <th data-en="Amount" data-ar="المبلغ">Amount</th>
+                                    <th data-en="Status" data-ar="الحالة">Status</th>
+                                    <th data-en="Invoice" data-ar="الفاتورة">Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billingHistory">
+                                <tr>
+                                    <td colspan="5" class="no-data" data-en="No billing history" data-ar="لا يوجد سجل فوترة">No billing history</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upgrade Modal -->
+    <div class="modal" id="upgradeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-en="Choose Your Plan" data-ar="اختر خطتك">Choose Your Plan</h2>
+                <button class="modal-close" onclick="closeUpgradeModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="plans-grid">
+                    <!-- Plans will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel Modal -->
+    <div class="modal" id="cancelModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-en="Cancel Subscription" data-ar="إلغاء الاشتراك">Cancel Subscription</h2>
+                <button class="modal-close" onclick="closeCancelModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p data-en="Are you sure you want to cancel your subscription? You'll lose access to premium features at the end of your billing period." 
+                   data-ar="هل أنت متأكد من رغبتك في إلغاء اشتراكك؟ ستفقد الوصول إلى الميزات المميزة في نهاية فترة الفوترة.">
+                    Are you sure you want to cancel your subscription? You'll lose access to premium features at the end of your billing period.
+                </p>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-outline" onclick="closeCancelModal()" data-en="Keep Subscription" data-ar="الاحتفاظ بالاشتراك">Keep Subscription</button>
+                    <button class="btn btn-danger" onclick="cancelSubscription()" data-en="Cancel Subscription" data-ar="إلغاء الاشتراك">Cancel Subscription</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand">
+                        <span class="brand-text" style="font-size: 1.5rem; font-weight: 700;">Zentra</span>
+                    </div>
+                    <p data-en="Turn your ideas into apps instantly with AI-powered generation." data-ar="حول أفكارك إلى تطبيقات فوراً مع الإنشاء المدعوم بالذكاء الاصطناعي.">
+                        Turn your ideas into apps instantly with AI-powered generation.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-en="Product" data-ar="المنتج">Product</h4>
+                        <a href="index.html#features" data-en="Features" data-ar="المميزات">Features</a>
+                        <a href="pricing.html" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                        <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                        <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+                        <a href="mailto:support@zentra.app" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</a>
+                        <a href="#" data-en="API Docs" data-ar="وثائق API">API Docs</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+                        <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                        <a href="refund.html" data-en="Refund Policy" data-ar="سياسة الاسترداد">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zentra. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/subscription.js"></script>
+</body>
+</html>

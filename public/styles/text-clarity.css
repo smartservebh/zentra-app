@@ -1,0 +1,211 @@
+/* تحسين وضوح النصوص - Text Clarity Improvements */
+
+/* تحديث ألوان النصوص لتكون أكثر وضوحاً */
+:root {
+    /* نصوص أكثر وضوحاً */
+    --text-secondary-clear: #374151;
+    --text-tertiary-clear: #4b5563;
+}
+
+/* تطبيق الألوان الجديدة على جميع النصوص الثانوية */
+p,
+.hero-subtitle,
+.section-header p,
+.feature-card p,
+.about-text p,
+.footer-brand p,
+.link-group a,
+.nav-link,
+.lang-toggle,
+.suggestions-label,
+.plan-features li,
+.stat-label,
+.form-label {
+    color: var(--text-secondary-clear) !important;
+}
+
+/* تحسين وضوح النصوص في البطاقات */
+.feature-card p,
+.pricing-card .plan-features li {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في التنقل */
+.nav-link {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* تحسين وضوح النصوص في الفوتر */
+.footer-brand p,
+.link-group a {
+    color: #d1d5db !important;
+}
+
+.link-group a:hover {
+    color: #ffffff !important;
+}
+
+/* تحسين وضوح النصوص في الأسعار */
+.currency,
+.period {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في الإحصائيات */
+.stat-label {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 600 !important;
+}
+
+/* تحسين وضوح النصوص في النماذج */
+.form-label {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+/* تحسين وضوح النصوص في الاقتراحات */
+.suggestions-label {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في العناوين الفرعية */
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 400 !important;
+}
+
+.section-header p {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين التباين للنصوص على الخلفيات المختلفة */
+.card p,
+.card .text-secondary {
+    color: var(--text-secondary-clear) !important;
+}
+
+/* تحسين وضوح النصوص في التنبيهات */
+.alert p {
+    color: inherit !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في الأزرار */
+.btn {
+    font-weight: 600 !important;
+}
+
+/* تحسين وضوح النصوص في القوائم */
+li {
+    color: var(--text-secondary-clear) !important;
+}
+
+/* تحسين وضوح النصوص في الجداول */
+table td,
+table th {
+    color: var(--text-secondary-clear) !important;
+}
+
+/* تحسين وضوح النصوص للعناصر التفاعلية */
+.suggestion {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في الحقول */
+.form-input,
+.form-textarea,
+.form-select {
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--text-tertiary-clear) !important;
+    font-weight: 400 !important;
+}
+
+/* تحسين وضوح النصوص في الروابط */
+a {
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في العناوين */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* تحسين خاص للنصوص الصغيرة */
+small,
+.text-sm {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في الشارات */
+.badge,
+.plan-badge {
+    font-weight: 600 !important;
+}
+
+/* تحسين وضوح النصوص في التواريخ والأرقام */
+.date,
+.number,
+.price .amount {
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* تحسين وضوح النصوص في الحالات الخاصة */
+.muted {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+.text-muted {
+    color: var(--text-secondary-clear) !important;
+    font-weight: 500 !important;
+}
+
+/* تحسين وضوح النصوص في الوضع المظلم */
+[data-theme="dark"] p,
+[data-theme="dark"] .text-secondary {
+    color: #e5e7eb !important;
+}
+
+[data-theme="dark"] .text-tertiary {
+    color: #d1d5db !important;
+}
+
+/* تحسين إمكانية القراءة للنصوص الطويلة */
+.long-text,
+.content p {
+    line-height: 1.7 !important;
+    color: var(--text-secondary-clear) !important;
+}
+
+/* تحسين وضوح النصوص في الجوال */
+@media (max-width: 768px) {
+    p,
+    .text-secondary {
+        font-size: 1rem !important;
+        color: var(--text-secondary-clear) !important;
+        font-weight: 500 !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+    }
+}

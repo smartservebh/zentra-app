@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: zentra-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: zentra
+      MONGO_INITDB_ROOT_PASSWORD: zentra123
+      MONGO_INITDB_DATABASE: zentra
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - zentra-network
+
+  # Zentra Application
+  zentra-app:
+    build: .
+    container_name: zentra-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://zentra:zentra123@mongodb:27017/zentra?authSource=admin
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - OPENAI_API_KEY=your-openai-api-key-here
+      - PORT=3000
+    depends_on:
+      - mongodb
+    volumes:
+      - ./generated-apps:/app/generated-apps
+    networks:
+      - zentra-network
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: zentra-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - zentra-app
+    networks:
+      - zentra-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  zentra-network:
+    driver: bridge

@@ -1,0 +1,57 @@
+{
+  "name": "zentra",
+  "version": "1.0.0",
+  "description": "SaaS platform that converts natural language prompts into web applications",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node dev.js",
+    "setup": "node setup-db.js",
+    "quick-start": "node start.js",
+    "build": "node build.js",
+    "build:frontend": "node build.js",
+    "build:api": "npm install --production",
+    "deploy": "npm run build && echo 'Ready to deploy dist/ folder'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"Linting not configured yet\"",
+    "clean": "rm -rf node_modules package-lock.json && npm install",
+    "reset-db": "node setup-db.js",
+    "production": "NODE_ENV=production node server.js",
+    "setup-mongosh": "node scripts/setup-mongosh.js",
+    "test-mongosh": "node scripts/test-mongosh.js",
+    "clean-npm-cache": "scripts\\clean-npm-cache.bat",
+    "mongosh": "npx --yes mongosh",
+    "db:shell": "npx --yes mongosh mongodb://localhost:27017/zentra"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.5",
+    "archiver": "^5.3.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.10.0",
+    "express-validator": "^7.0.1",
+    "fs-extra": "^11.3.0",
+    "handlebars": "^4.7.8",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.7",
+    "openai": "^4.0.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "saas",
+    "web-app-generator",
+    "ai",
+    "arabic",
+    "no-code"
+  ],
+  "author": "Zentra Team",
+  "license": "MIT"
+}

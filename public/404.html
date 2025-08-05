@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Zentra</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family-en);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 1;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .error-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 1;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-description {
+                font-size: 1.125rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title" data-en="Page Not Found" data-ar="الصفحة غير موجودة">Page Not Found</h1>
+        <p class="error-description" data-en="Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL." data-ar="عذراً! الصفحة التي تبحث عنها غير موجودة. ربما تم نقلها أو حذفها أو أدخلت رابطاً خاطئاً.">
+            Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
+        </p>
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary" data-en="Go Home" data-ar="الصفحة الرئيسية">Go Home</a>
+            <a href="javascript:history.back()" class="btn btn-outline" data-en="Go Back" data-ar="رجوع">Go Back</a>
+        </div>
+    </div>
+<script>
+        // Simple language support for 404 page
+        const currentLang = localStorage.getItem('zentra-language') || 'en';
+        
+        if (currentLang === 'ar') {
+            document.documentElement.setAttribute('lang', 'ar');
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.body.style.fontFamily = 'var(--font-family-ar)';
+            
+            // Update text content
+            document.querySelectorAll('[data-ar]').forEach(element => {
+                element.textContent = element.getAttribute('data-ar');
+            });
+        }
+    </script>
+</body>
+</html>

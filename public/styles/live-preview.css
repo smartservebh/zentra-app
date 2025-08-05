@@ -1,0 +1,667 @@
+/* Live Preview Styles */
+
+:root {
+    --header-height: 60px;
+    --primary: #667eea;
+    --primary-dark: #5a67d8;
+    --secondary: #48bb78;
+    --text-primary: #1a202c;
+    --text-secondary: #718096;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f7fafc;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* RTL Support */
+[dir="rtl"] body {
+    font-family: 'Tajawal', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Preview Header Bar */
+.preview-header-bar {
+    height: var(--header-height);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 100;
+}
+
+.header-left,
+.header-center,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.header-center {
+    flex: 2;
+    justify-content: center;
+}
+
+.header-right {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* Back Button */
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* App Info */
+.app-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+.preview-badge {
+    padding: 4px 10px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* URL Bar */
+.url-bar {
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 400px;
+}
+
+.url-protocol {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.url-domain {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.url-id {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-copy-url {
+    margin-left: 10px;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-url:hover {
+    color: var(--primary);
+}
+
+/* Action Buttons */
+.btn-action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-action:first-child {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.btn-action:first-child:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-lang {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-lang:hover {
+    background: var(--bg-secondary);
+}
+
+/* Preview Container */
+.preview-container {
+    height: calc(100vh - var(--header-height));
+    width: 100%;
+    position: relative;
+    background: #f5f5f5;
+}
+
+#appPreviewFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* Share Modal */
+.share-section {
+    margin-bottom: 25px;
+}
+
+.share-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.share-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.share-input-group input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    background: var(--bg-secondary);
+}
+
+.btn-copy {
+    padding: 10px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-copy:hover {
+    background: var(--primary-dark);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.social-btn.twitter:hover {
+    border-color: #1DA1F2;
+    color: #1DA1F2;
+}
+
+.social-btn.linkedin:hover {
+    border-color: #0077B5;
+    color: #0077B5;
+}
+
+.social-btn.facebook:hover {
+    border-color: #1877F2;
+    color: #1877F2;
+}
+
+#embedCode {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    background: var(--bg-secondary);
+    resize: none;
+    margin-bottom: 10px;
+}
+
+/* Publish Modal */
+.publish-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.publish-option {
+    position: relative;
+}
+
+.publish-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.publish-option label {
+    display: block;
+    padding: 20px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.publish-option input[type="radio"]:checked + label {
+    border-color: var(--primary);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.option-header h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge.free {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge.pro {
+    background: #ddd6fe;
+    color: #5b21b6;
+}
+
+.publish-option p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.url-preview {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--primary);
+    background: var(--bg-secondary);
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.custom-domain-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.publish-option input[type="radio"]:not(:checked) + label .custom-domain-input {
+    opacity: 0.5;
+}
+
+.publish-settings {
+    margin-bottom: 25px;
+}
+
+.publish-settings h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-label span {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.publish-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-secondary);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+/* Export Modal */
+.export-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.export-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.export-option:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.export-option svg {
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.export-option h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.export-option p {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--text-primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Fullscreen Mode */
+body.fullscreen .preview-header-bar {
+    display: none;
+}
+
+body.fullscreen .preview-container {
+    height: 100vh;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .preview-header-bar {
+        padding: 0 10px;
+    }
+    
+    .header-center {
+        display: none;
+    }
+    
+    .btn-action span,
+    .btn-back span {
+        display: none;
+    }
+    
+    .btn-action,
+    .btn-back {
+        padding: 8px;
+    }
+    
+    .app-name {
+        font-size: 14px;
+    }
+    
+    .export-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f7fafc;
+        --text-secondary: #cbd5e0;
+        --bg-primary: #1a202c;
+        --bg-secondary: #2d3748;
+        --border: #4a5568;
+    }
+    
+    .preview-badge {
+        background: #744210;
+        color: #fef3c7;
+    }
+    
+    .social-btn {
+        background: var(--bg-secondary);
+    }
+    
+    #appPreviewFrame {
+        background: var(--bg-secondary);
+    }
+}

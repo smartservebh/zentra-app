@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Zentra</title>
+    <meta name="description" content="Manage your AI-generated web applications and create new ones.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/logo.svg" alt="Zentra" class="logo">
+                <span class="brand-text">Zentra</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                <a href="#" class="nav-link" data-en="My Apps" data-ar="تطبيقاتي">My Apps</a>
+                <a href="#" class="nav-link" data-en="Discover" data-ar="استكشف">Discover</a>
+                <a href="pricing.html" class="nav-link" data-en="Upgrade" data-ar="ترقية">Upgrade</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" onclick="zentra.toggleLanguage()">
+                    <span class="lang-text">العربية</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-button" onclick="toggleUserMenu()">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span class="user-name" id="userName">User</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" onclick="showProfile()" data-en="Profile" data-ar="الملف الشخصي">Profile</a>
+                        <a href="#" onclick="showSettings()" data-en="Settings" data-ar="الإعدادات">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" onclick="logout()" data-en="Logout" data-ar="تسجيل الخروج">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" onclick="showSection('overview')" data-en="Overview" data-ar="نظرة عامة">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                    </svg>
+                    <span>Overview</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showSection('apps')" data-en="My Apps" data-ar="تطبيقاتي">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+                    </svg>
+                    <span>My Apps</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showSection('create')" data-en="Create New" data-ar="إنشاء جديد">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <span>Create New</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showSection('discover')" data-en="Discover" data-ar="استكشف">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <span>Discover</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showSection('settings')" data-en="Settings" data-ar="الإعدادات">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="dashboard-content">
+            <!-- Overview Section -->
+            <section id="overview-section" class="content-section active">
+                <div class="section-header">
+                    <h1 data-en="Dashboard Overview" data-ar="نظرة عامة على لوحة التحكم">Dashboard Overview</h1>
+                    <p data-en="Welcome back! Here's what's happening with your apps." data-ar="مرحباً بعودتك! إليك ما يحدث مع تطبيقاتك.">Welcome back! Here's what's happening with your apps.</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📱</div>
+                        <div class="stat-content">
+                            <h3 id="totalApps">0</h3>
+                            <p data-en="Total Apps" data-ar="إجمالي التطبيقات">Total Apps</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-content">
+                            <h3 id="totalViews">0</h3>
+                            <p data-en="Total Views" data-ar="إجمالي المشاهدات">Total Views</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-content">
+                            <h3 id="publishedApps">0</h3>
+                            <p data-en="Published Apps" data-ar="التطبيقات المنشورة">Published Apps</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <h3 id="remainingApps">0</h3>
+                            <p data-en="Remaining Apps" data-ar="التطبيقات المتبقية">Remaining Apps</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2 data-en="Quick Actions" data-ar="إجراءات سريعة">Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-card" onclick="showSection('create')">
+                            <div class="action-icon">➕</div>
+                            <h3 data-en="Create New App" data-ar="إنشاء تطبيق جديد">Create New App</h3>
+                            <p data-en="Start building your next amazing app" data-ar="ابدأ في بناء تطبيقك المذهل التالي">Start building your next amazing app</p>
+                        </button>
+                        <button class="action-card" onclick="showSection('apps')">
+                            <div class="action-icon">📋</div>
+                            <h3 data-en="Manage Apps" data-ar="إدارة التطبيقات">Manage Apps</h3>
+                            <p data-en="View and edit your existing apps" data-ar="عرض وتحرير تطبيقاتك الموجودة">View and edit your existing apps</p>
+                        </button>
+                        <button class="action-card" onclick="showSection('discover')">
+                            <div class="action-icon">🔍</div>
+                            <h3 data-en="Discover Apps" data-ar="استكشاف التطبيقات">Discover Apps</h3>
+                            <p data-en="Explore apps created by the community" data-ar="استكشف التطبيقات التي أنشأها المجتمع">Explore apps created by the community</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Apps -->
+                <div class="recent-apps">
+                    <div class="section-header">
+                        <h2 data-en="Recent Apps" data-ar="التطبيقات الحديثة">Recent Apps</h2>
+                        <a href="#" onclick="showSection('apps')" data-en="View All" data-ar="عرض الكل">View All</a>
+                    </div>
+                    <div class="apps-grid" id="recentAppsGrid">
+                        <!-- Recent apps will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Apps Section -->
+            <section id="apps-section" class="content-section">
+                <div class="section-header">
+                    <h1 data-en="My Apps" data-ar="تطبيقاتي">My Apps</h1>
+                    <button class="btn btn-primary" onclick="showSection('create')" data-en="Create New App" data-ar="إنشاء تطبيق جديد">Create New App</button>
+                </div>
+
+                <!-- Apps Filter -->
+                <div class="apps-filter">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" onclick="filterApps('all')" data-en="All Apps" data-ar="جميع التطبيقات">All Apps</button>
+                        <button class="filter-tab" onclick="filterApps('published')" data-en="Published" data-ar="منشور">Published</button>
+                        <button class="filter-tab" onclick="filterApps('draft')" data-en="Drafts" data-ar="مسودات">Drafts</button>
+                    </div>
+                    <div class="filter-search">
+                        <input type="text" placeholder="Search apps..." data-en-placeholder="Search apps..." data-ar-placeholder="البحث في التطبيقات..." id="appsSearch">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Apps Grid -->
+                <div class="apps-grid" id="myAppsGrid">
+                    <!-- Apps will be loaded here -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="appsPagination">
+                    <!-- Pagination will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Create New App Section -->
+            <section id="create-section" class="content-section">
+                <div class="section-header">
+                    <h1 data-en="Create New App" data-ar="إنشاء تطبيق جديد">Create New App</h1>
+                    <p data-en="Describe your app idea and let AI bring it to life" data-ar="اوصف فكرة تطبيقك ودع الذكاء الاصطناعي يحييها">Describe your app idea and let AI bring it to life</p>
+                </div>
+
+                <!-- Create App Form -->
+                <div class="create-app-form">
+                    <div class="form-group">
+                        <label for="appPrompt" class="form-label" data-en="Describe Your App" data-ar="اوصف تطبيقك">Describe Your App</label>
+                        <textarea 
+                            id="appPrompt" 
+                            class="form-textarea" 
+                            rows="6"
+                            placeholder="Describe your app idea in detail... (e.g., 'Create a todo list app with dark mode and categories')"
+                            data-en-placeholder="Describe your app idea in detail... (e.g., 'Create a todo list app with dark mode and categories')"
+                            data-ar-placeholder="اوصف فكرة تطبيقك بالتفصيل... (مثال: 'أنشئ تطبيق قائمة مهام مع الوضع المظلم والفئات')"
+                        ></textarea>
+                        <div class="form-hint">
+                            <span data-en="Tip: Be specific about features, design, and functionality you want" data-ar="نصيحة: كن محدداً حول الميزات والتصميم والوظائف التي تريدها">Tip: Be specific about features, design, and functionality you want</span>
+                        </div>
+                    </div>
+
+                    <!-- App Suggestions -->
+                    <div class="app-suggestions">
+                        <h3 data-en="Popular Ideas" data-ar="أفكار شائعة">Popular Ideas</h3>
+                        <div class="suggestions-grid">
+                            <button class="suggestion-card" onclick="fillAppPrompt(this)" data-en="Personal Portfolio" data-ar="محفظة شخصية">
+                                <div class="suggestion-icon">👤</div>
+                                <span>Personal Portfolio</span>
+                            </button>
+                            <button class="suggestion-card" onclick="fillAppPrompt(this)" data-en="Todo List App" data-ar="تطبيق قائمة المهام">
+                                <div class="suggestion-icon">✅</div>
+                                <span>Todo List App</span>
+                            </button>
+                            <button class="suggestion-card" onclick="fillAppPrompt(this)" data-en="Weather Dashboard" data-ar="لوحة الطقس">
+                                <div class="suggestion-icon">🌤️</div>
+                                <span>Weather Dashboard</span>
+                            </button>
+                            <button class="suggestion-card" onclick="fillAppPrompt(this)" data-en="Recipe Finder" data-ar="باحث الوصفات">
+                                <div class="suggestion-icon">🍳</div>
+                                <span>Recipe Finder</span>
+                            </button>
+                            <button class="suggestion-card" onclick="fillAppPrompt(this)" data-en="Calculator App" data-ar="تطبيق حاسبة">
+                                <div class="suggestion-icon">🧮</div>
+                                <span>Calculator App</span>
+                            </button>
+                            <button class="suggestion-card" onclick="fillAppPrompt(this)" data-en="Quiz Game" data-ar="لعبة اختبار">
+                                <div class="suggestion-icon">🎯</div>
+                                <span>Quiz Game</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button class="btn btn-primary btn-lg" id="generateAppBtn" onclick="generateNewApp()" disabled>
+                        <span class="btn-text" data-en="Generate App" data-ar="إنشاء التطبيق">Generate App</span>
+                        <span class="btn-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <span data-en="Generating..." data-ar="جاري الإنشاء...">Generating...</span>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- App Preview -->
+                <div class="app-preview" id="appPreview" style="display: none;">
+                    <div class="preview-header">
+                        <h3 data-en="App Preview" data-ar="معاينة التطبيق">App Preview</h3>
+                        <div class="preview-actions">
+                            <button class="btn btn-outline" onclick="editGeneratedApp()" data-en="Edit" data-ar="تعديل">Edit</button>
+                            <button class="btn btn-primary" onclick="saveGeneratedApp()" data-en="Save App" data-ar="حفظ التطبيق">Save App</button>
+                        </div>
+                    </div>
+                    <div class="preview-frame">
+                        <iframe id="previewFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discover Section -->
+            <section id="discover-section" class="content-section">
+                <div class="section-header">
+                    <h1 data-en="Discover Apps" data-ar="استكشاف التطبيقات">Discover Apps</h1>
+                    <p data-en="Explore amazing apps created by the community" data-ar="استكشف التطبيقات المذهلة التي أنشأها المجتمع">Explore amazing apps created by the community</p>
+                </div>
+
+                <!-- Discover Filter -->
+                <div class="discover-filter">
+                    <div class="filter-categories">
+                        <button class="category-btn active" onclick="filterDiscoverApps('all')" data-en="All" data-ar="الكل">All</button>
+                        <button class="category-btn" onclick="filterDiscoverApps('business')" data-en="Business" data-ar="أعمال">Business</button>
+                        <button class="category-btn" onclick="filterDiscoverApps('education')" data-en="Education" data-ar="تعليم">Education</button>
+                        <button class="category-btn" onclick="filterDiscoverApps('entertainment')" data-en="Entertainment" data-ar="ترفيه">Entertainment</button>
+                        <button class="category-btn" onclick="filterDiscoverApps('productivity')" data-en="Productivity" data-ar="إنتاجية">Productivity</button>
+                        <button class="category-btn" onclick="filterDiscoverApps('social')" data-en="Social" data-ar="اجتماعي">Social</button>
+                        <button class="category-btn" onclick="filterDiscoverApps('utility')" data-en="Utility" data-ar="أدوات">Utility</button>
+                    </div>
+                </div>
+
+                <!-- Discover Apps Grid -->
+                <div class="apps-grid" id="discoverAppsGrid">
+                    <!-- Discover apps will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="section-header">
+                    <h1 data-en="Settings" data-ar="الإعدادات">Settings</h1>
+                    <p data-en="Manage your account and preferences" data-ar="إدارة حسابك وتفضيلاتك">Manage your account and preferences</p>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- Profile Settings -->
+                    <div class="settings-card">
+                        <h3 data-en="Profile Information" data-ar="معلومات الملف الشخصي">Profile Information</h3>
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="profileUsername" class="form-label" data-en="Username" data-ar="اسم المستخدم">Username</label>
+                                <input type="text" id="profileUsername" name="username" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail" class="form-label" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+                                <input type="email" id="profileEmail" name="email" class="form-input" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferredLanguage" class="form-label" data-en="Preferred Language" data-ar="اللغة المفضلة">Preferred Language</label>
+                                <select id="preferredLanguage" name="preferredLanguage" class="form-select">
+                                    <option value="en" data-en="English" data-ar="الإنجليزية">English</option>
+                                    <option value="ar" data-en="Arabic" data-ar="العربية">Arabic</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-en="Update Profile" data-ar="تحديث الملف الشخصي">Update Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Plan Information -->
+                    <div class="settings-card">
+                        <h3 data-en="Plan Information" data-ar="معلومات الخطة">Plan Information</h3>
+                        <div class="plan-info">
+                            <div class="plan-current">
+                                <span class="plan-name" id="currentPlan">Free</span>
+                                <span class="plan-apps" id="planAppsInfo">3 apps remaining</span>
+                            </div>
+                            <a href="pricing.html" class="btn btn-outline" data-en="Upgrade Plan" data-ar="ترقية الخطة">Upgrade Plan</a>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-card">
+                        <h3 data-en="Security" data-ar="الأمان">Security</h3>
+                        <form id="passwordForm">
+                            <div class="form-group">
+                                <label for="currentPassword" class="form-label" data-en="Current Password" data-ar="كلمة المرور الحالية">Current Password</label>
+                                <input type="password" id="currentPassword" name="currentPassword" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword" class="form-label" data-en="New Password" data-ar="كلمة المرور الجديدة">New Password</label>
+                                <input type="password" id="newPassword" name="newPassword" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword" class="form-label" data-en="Confirm New Password" data-ar="تأكيد كلمة المرور الجديدة">Confirm New Password</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-input">
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-en="Change Password" data-ar="تغيير كلمة المرور">Change Password</button>
+                        </form>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="settings-card danger-zone">
+                        <h3 data-en="Danger Zone" data-ar="منطقة الخطر">Danger Zone</h3>
+                        <p data-en="These actions cannot be undone" data-ar="هذه الإجراءات لا يمكن التراجع عنها">These actions cannot be undone</p>
+                        <button class="btn btn-error" onclick="deleteAccount()" data-en="Delete Account" data-ar="حذف الحساب">Delete Account</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="appModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">App Details</h3>
+                <button class="modal-close" onclick="closeModal('appModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

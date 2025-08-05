@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt History - Zentra</title>
+    <meta name="description" content="View your prompt history and generated apps">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/prompts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-text">Zentra</a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                <a href="prompts.html" class="nav-link active" data-en="Prompts" data-ar="البرومبتات">Prompts</a>
+                <a href="pricing.html" class="nav-link" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                <div class="nav-actions">
+                    <button class="lang-toggle" onclick="toggleLanguage()">
+                        <span class="lang-text">العربية</span>
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-menu-toggle">
+                            <span class="user-avatar">U</span>
+                            <span class="user-name">User</span>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                            <a href="prompts.html" data-en="Prompts" data-ar="البرومبتات">Prompts</a>
+                            <a href="subscription.html" data-en="Subscription" data-ar="الاشتراك">Subscription</a>
+                            <a href="settings.html" data-en="Settings" data-ar="الإعدادات">Settings</a>
+                            <hr>
+                            <a href="#" onclick="logout()" data-en="Logout" data-ar="تسجيل الخروج">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Prompts Section -->
+    <section class="prompts-section">
+        <div class="container">
+            <div class="prompts-header">
+                <div class="header-content">
+                    <h1 data-en="Prompt History" data-ar="سجل البرومبتات">Prompt History</h1>
+                    <p data-en="View and manage all your prompts and generated apps" data-ar="عرض وإدارة جميع برومبتاتك والتطبيقات المولدة">View and manage all your prompts and generated apps</p>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="showNewPromptModal()">
+                        <span data-en="New Prompt" data-ar="برومبت جديد">New Prompt</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-content">
+                        <h3 id="totalPrompts">0</h3>
+                        <p data-en="Total Prompts" data-ar="إجمالي البرومبتات">Total Prompts</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <h3 id="completedPrompts">0</h3>
+                        <p data-en="Completed" data-ar="مكتملة">Completed</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-content">
+                        <h3 id="processingPrompts">0</h3>
+                        <p data-en="Processing" data-ar="قيد المعالجة">Processing</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-content">
+                        <h3 id="failedPrompts">0</h3>
+                        <p data-en="Failed" data-ar="فشلت">Failed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label data-en="Status:" data-ar="الحالة:">Status:</label>
+                    <select id="statusFilter" onchange="filterPrompts()">
+                        <option value="" data-en="All" data-ar="الكل">All</option>
+                        <option value="pending" data-en="Pending" data-ar="معلق">Pending</option>
+                        <option value="processing" data-en="Processing" data-ar="قيد المعالجة">Processing</option>
+                        <option value="completed" data-en="Completed" data-ar="مكتمل">Completed</option>
+                        <option value="failed" data-en="Failed" data-ar="فشل">Failed</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label data-en="Type:" data-ar="النوع:">Type:</label>
+                    <select id="typeFilter" onchange="filterPrompts()">
+                        <option value="" data-en="All" data-ar="الكل">All</option>
+                        <option value="web" data-en="Web App" data-ar="تطبيق ويب">Web App</option>
+                        <option value="mobile" data-en="Mobile App" data-ar="تطبيق موبايل">Mobile App</option>
+                        <option value="api" data-en="API" data-ar="API">API</option>
+                        <option value="fullstack" data-en="Full Stack" data-ar="فول ستاك">Full Stack</option>
+                        <option value="other" data-en="Other" data-ar="أخرى">Other</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <input type="text" id="searchFilter" placeholder="Search prompts..." 
+                           data-placeholder-en="Search prompts..." 
+                           data-placeholder-ar="ابحث في البرومبتات..."
+                           onkeyup="filterPrompts()">
+                </div>
+            </div>
+
+            <!-- Prompts List -->
+            <div class="prompts-list" id="promptsList">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p data-en="Loading prompts..." data-ar="جاري تحميل البرومبتات...">Loading prompts...</p>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- New Prompt Modal -->
+    <div class="modal" id="newPromptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-en="Create New Prompt" data-ar="إنشاء برومبت جديد">Create New Prompt</h2>
+                <button class="modal-close" onclick="closeNewPromptModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="newPromptForm">
+                    <div class="form-group">
+                        <label data-en="App Type" data-ar="نوع التطبيق">App Type</label>
+                        <select id="appType" required>
+                            <option value="web" data-en="Web Application" data-ar="تطبيق ويب">Web Application</option>
+                            <option value="mobile" data-en="Mobile App" data-ar="تطبيق موبايل">Mobile App</option>
+                            <option value="api" data-en="API/Backend" data-ar="API/خلفية">API/Backend</option>
+                            <option value="fullstack" data-en="Full Stack App" data-ar="تطبيق فول ستاك">Full Stack App</option>
+                            <option value="other" data-en="Other" data-ar="أخرى">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-en="Describe your app" data-ar="اوصف تطبيقك">Describe your app</label>
+                        <textarea id="promptText" rows="6" required 
+                                  placeholder="Describe what you want to build in detail..."
+                                  data-placeholder-en="Describe what you want to build in detail..."
+                                  data-placeholder-ar="اوصف ما تريد بناءه بالتفصيل..."></textarea>
+                        <div class="char-count">
+                            <span id="charCount">0</span> / 5000
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="closeNewPromptModal()">
+                            <span data-en="Cancel" data-ar="إلغاء">Cancel</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span data-en="Generate App" data-ar="توليد التطبيق">Generate App</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prompt Details Modal -->
+    <div class="modal" id="promptDetailsModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 data-en="Prompt Details" data-ar="تفاصيل البرومبت">Prompt Details</h2>
+                <button class="modal-close" onclick="closePromptDetailsModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body" id="promptDetailsContent">
+                <!-- Details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand">
+                        <span class="brand-text" style="font-size: 1.5rem; font-weight: 700;">Zentra</span>
+                    </div>
+                    <p data-en="Turn your ideas into apps instantly with AI-powered generation." data-ar="حول أفكارك إلى تطبيقات فوراً مع الإنشاء المدعوم بالذكاء الاصطناعي.">
+                        Turn your ideas into apps instantly with AI-powered generation.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-en="Product" data-ar="المنتج">Product</h4>
+                        <a href="index.html#features" data-en="Features" data-ar="المميزات">Features</a>
+                        <a href="pricing.html" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                        <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                        <a href="faq.html" data-en="FAQ" data-ar="ا��أسئلة الشائعة">FAQ</a>
+                        <a href="mailto:support@zentra.app" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</a>
+                        <a href="#" data-en="API Docs" data-ar="وثائق API">API Docs</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+                        <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                        <a href="refund.html" data-en="Refund Policy" data-ar="سياسة الاسترداد">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zentra. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/prompts.js"></script>
+</body>
+</html>

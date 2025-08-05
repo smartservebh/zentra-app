@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Viewer - Zentra</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family-en);
+            background-color: var(--bg-secondary);
+        }
+        
+        .viewer-header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .viewer-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .viewer-title h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+        
+        .viewer-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .viewer-frame {
+            width: 100%;
+            height: calc(100vh - 80px);
+            border: none;
+            background: white;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 80px);
+            color: var(--text-secondary);
+        }
+        
+        .error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 80px);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error h2 {
+            color: var(--error-color);
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .viewer-header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .viewer-frame {
+                height: calc(100vh - 120px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="viewer-header">
+        <div class="viewer-title">
+            <a href="index.html" style="text-decoration: none; color: var(--primary-color);">
+                <img src="assets/logo.svg" alt="Zentra" style="width: 24px; height: 24px;">
+            </a>
+            <h1 id="appTitle">Loading App...</h1>
+        </div>
+        <div class="viewer-actions">
+            <button class="btn btn-outline btn-sm" onclick="openInNewTab()" id="openBtn" style="display: none;">
+                Open in New Tab
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="goBack()">
+                Back
+            </button>
+        </div>
+    </div>
+    
+    <div id="loadingState" class="loading">
+        <div>
+            <div class="spinner" style="margin: 0 auto 1rem;"></div>
+            <p>Loading app...</p>
+        </div>
+    </div>
+    
+    <div id="errorState" class="error" style="display: none;">
+        <h2>App Not Found</h2>
+        <p>The app you're looking for doesn't exist or has been removed.</p>
+        <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+    </div>
+    
+    <iframe id="appFrame" class="viewer-frame" style="display: none;"></iframe>
+
+    <script>
+        let currentAppId = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadApp();
+        });
+        
+        async function loadApp() {
+            // Get app ID from URL
+            const pathParts = window.location.pathname.split('/');
+            currentAppId = pathParts[pathParts.length - 1];
+            
+            if (!currentAppId) {
+                showError();
+                return;
+            }
+            
+            try {
+                // Load app data
+                const response = await fetch(`/api/apps/${currentAppId}`);
+                
+                if (!response.ok) {
+                    throw new Error('App not found');
+                }
+                
+                const data = await response.json();
+                const app = data.app;
+                
+                // Update title
+                document.getElementById('appTitle').textContent = app.title;
+                document.title = `${app.title} - Zentra`;
+                
+                // Load app in iframe
+                const appFrame = document.getElementById('appFrame');
+                appFrame.src = `/generated-apps/${currentAppId}/app.html`;
+                
+                // Show frame when loaded
+                appFrame.onload = function() {
+                    document.getElementById('loadingState').style.display = 'none';
+                    appFrame.style.display = 'block';
+                    document.getElementById('openBtn').style.display = 'block';
+                };
+                
+                appFrame.onerror = function() {
+                    showError();
+                };
+                
+            } catch (error) {
+                console.error('Failed to load app:', error);
+                showError();
+            }
+        }
+        
+        function showError() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'flex';
+        }
+        
+        function openInNewTab() {
+            if (currentAppId) {
+                window.open(`/generated-apps/${currentAppId}/app.html`, '_blank');
+            }
+        }
+        
+        function goBack() {
+            if (document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = '/';
+            }
+        }
+    </script>
+</body>
+</html>
