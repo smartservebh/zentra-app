@@ -1,0 +1,65 @@
+/* Dark Sections Text Fix */
+.dark-section,
+.dark-section * {
+    color: #ffffff !important;
+}
+
+/* Pricing Cards Enhancement */
+.pricing-card {
+    background: linear-gradient(135deg, #6e7cff 0%, #836bff 100%) !important;
+    border: 1px solid #7d7dff40 !important;
+    color: #ffffff !important;
+}
+
+.pricing-card .plan-name {
+    color: #dedcff !important;
+    font-weight: 700;
+}
+
+.pricing-card .price-amount,
+.pricing-card .price-currency {
+    color: #ffffff !important;
+}
+
+.pricing-card .plan-description,
+.pricing-card .plan-credits,
+.pricing-card .plan-highlights,
+.pricing-card p,
+.pricing-card span,
+.pricing-card li {
+    color: #ffffff !important;
+}
+
+/* Contact Section Dark */
+.contact-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.contact-section,
+.contact-section * {
+    color: #ffffff !important;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero,
+.hero * {
+    color: #ffffff !important;
+}
+
+/* Footer Dark */
+.footer {
+    background: #0f0f1e;
+}
+
+.footer,
+.footer * {
+    color: #ffffff !important;
+}
+
+.footer a:hover {
+    color: #dedcff !important;
+}
