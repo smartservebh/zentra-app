@@ -78,7 +78,7 @@ p,
 
 /* تحسين وضوح النصوص في العناوين الفرعية */
 .hero-subtitle {
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: rgba(255, 255, 255, 1) !important;
     font-weight: 400 !important;
 }
 
@@ -206,6 +206,6 @@ small,
     
     .hero-subtitle {
         font-size: 1.125rem !important;
-        color: rgba(255, 255, 255, 0.95) !important;
+        color: rgba(255, 255, 255, 1) !important;
     }
 }
