@@ -2,7 +2,7 @@
 
 .pricing-section {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
 }
 
 .pricing-section .section-header {
