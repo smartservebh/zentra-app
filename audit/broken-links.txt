@@ -1,0 +1,20 @@
+Getting links from: https://zentrahub.pro/
+├─BROKEN─ https://zentrahub.pro/login.html (HTTP_308)
+├───OK─── https://i.pravatar.cc/150?img=1
+├───OK─── https://i.pravatar.cc/150?img=2
+├─BROKEN─ https://zentrahub.pro/register.html (HTTP_308)
+├─BROKEN─ https://zentrahub.pro/register.html (HTTP_308)
+├─BROKEN─ https://zentrahub.pro/register.html (HTTP_308)
+├─BROKEN─ https://zentrahub.pro/register.html (HTTP_308)
+├─BROKEN─ https://zentrahub.pro/register.html (HTTP_308)
+├───OK─── https://i.pravatar.cc/150?img=3
+├───OK─── https://i.pravatar.cc/150?img=4
+├───OK─── https://i.pravatar.cc/150?img=5
+├─BROKEN─ https://zentrahub.pro/cdn-cgi/l/email-protection#22515752524d50566258474c5650434a57400c52504d (HTTP_404)
+├─BROKEN─ https://zentrahub.pro/cdn-cgi/l/email-protection#c2b8a3bbafa382b8a7acb6b0a3aab7a0ecb2b0ad (HTTP_404)
+├───OK─── https://i.pravatar.cc/150?img=6
+├─BROKEN─ https://zentrahub.pro/dashboard.html (HTTP_308)
+├─BROKEN─ https://zentrahub.pro/faq.html (HTTP_308)
+├─BROKEN─ https://docs.zentrahub.pro/ (ERRNO_ENOTFOUND)
+├─BROKEN─ https://zentrahub.pro/privacy.html (HTTP_308)
+├─BROKEN─ https://zentrahub.pro/terms.html (HTTP_308)

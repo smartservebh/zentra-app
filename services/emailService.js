@@ -220,7 +220,7 @@ class EmailService {
             email: process.env.EMAIL_FROM || 'noreply@zentrahub.pro',
             name: 'Zentra'
           },
-          replyTo: process.env.EMAIL_REPLY_TO || 'support@zentrahub.pro',
+          replyTo: process.env.EMAIL_REPLY_TO || 'info@zentrahub.pro',
           subject,
           text,
           html

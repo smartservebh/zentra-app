@@ -169,4 +169,4 @@ appSchema.index({ userId: 1, createdAt: -1 });
 - [MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
 - [Mongoose Documentation](https://mongoosejs.com/docs/)
 - [MongoDB University](https://university.mongodb.com/)
-- Zentra Support: support@zentrahub.pro
+- Zentra Support: info@zentrahub.pro

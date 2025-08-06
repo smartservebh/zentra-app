@@ -24,7 +24,7 @@
 #### Single Sender Verification (Development)
 1. Click "Verify a Single Sender"
 2. From Email: `noreply@zentrahub.pro`
-3. Reply To: `support@zentrahub.pro`
+3. Reply To: `info@zentrahub.pro`
 4. Verify the email address
 
 ### 3. Create API Key

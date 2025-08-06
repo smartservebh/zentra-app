@@ -13,7 +13,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 class SendGridService {
   constructor() {
     this.from = process.env.EMAIL_FROM || 'noreply@zentrahub.pro';
-    this.replyTo = process.env.EMAIL_REPLY_TO || 'support@zentrahub.pro';
+    this.replyTo = process.env.EMAIL_REPLY_TO || 'info@zentrahub.pro';
     this.templatesDir = path.join(__dirname, '..', 'email-templates');
   }
 

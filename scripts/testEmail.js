@@ -61,7 +61,7 @@ function checkEnvironment() {
     // Check optional settings
     console.log(`\n${colors.cyan}Optional settings:${colors.reset}`);
     console.log(`EMAIL_FROM: ${process.env.EMAIL_FROM || 'noreply@zentrahub.pro'} (default)`);
-    console.log(`EMAIL_REPLY_TO: ${process.env.EMAIL_REPLY_TO || 'support@zentrahub.pro'} (default)`);
+    console.log(`EMAIL_REPLY_TO: ${process.env.EMAIL_REPLY_TO || 'info@zentrahub.pro'} (default)`);
     
     return sendgridConfigured || smtpConfigured;
 }

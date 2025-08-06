@@ -167,7 +167,7 @@ router.post('/create', auth, [
     // Send notification email to admin
     try {
       await emailService.sendEmail(
-        process.env.ADMIN_EMAIL || 'admin@zentrahub.pro',
+        process.env.ADMIN_EMAIL || 'info@zentrahub.pro',
         `New ${type} feedback: ${subject}`,
         'feedback-notification',
         {

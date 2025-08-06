@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://zentrahub.pro/",
+    "isRepresentativeRun": false,
+    "htmlPath": "c:\\Users\\PC\\Downloads\\zentra-app\\audit\\lhci\\zentrahub_pro--2025_08_06_01_54_10.report.html",
+    "jsonPath": "c:\\Users\\PC\\Downloads\\zentra-app\\audit\\lhci\\zentrahub_pro--2025_08_06_01_54_10.report.json",
+    "summary": {
+      "performance": 0.84,
+      "accessibility": 0.85,
+      "best-practices": 0.93,
+      "seo": 1
+    }
+  },
+  {
+    "url": "https://zentrahub.pro/",
+    "isRepresentativeRun": false,
+    "htmlPath": "c:\\Users\\PC\\Downloads\\zentra-app\\audit\\lhci\\zentrahub_pro--2025_08_06_01_54_24.report.html",
+    "jsonPath": "c:\\Users\\PC\\Downloads\\zentra-app\\audit\\lhci\\zentrahub_pro--2025_08_06_01_54_24.report.json",
+    "summary": {
+      "performance": 0.85,
+      "accessibility": 0.85,
+      "best-practices": 0.93,
+      "seo": 1
+    }
+  },
+  {
+    "url": "https://zentrahub.pro/",
+    "isRepresentativeRun": true,
+    "htmlPath": "c:\\Users\\PC\\Downloads\\zentra-app\\audit\\lhci\\zentrahub_pro--2025_08_06_01_53_54.report.html",
+    "jsonPath": "c:\\Users\\PC\\Downloads\\zentra-app\\audit\\lhci\\zentrahub_pro--2025_08_06_01_53_54.report.json",
+    "summary": {
+      "performance": 0.85,
+      "accessibility": 0.85,
+      "best-practices": 0.93,
+      "seo": 1
+    }
+  }
+]

@@ -306,4 +306,4 @@ sudo tail -f /var/log/nginx/error.log
 - [SSL Labs](https://www.ssllabs.com/)
 - [Security Headers](https://securityheaders.com/)
 - Cloudflare Support: support@cloudflare.com
-- Zentra Support: support@zentrahub.pro
+- Zentra Support: info@zentrahub.pro

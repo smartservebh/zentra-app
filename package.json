@@ -43,7 +43,12 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.54.2",
+    "broken-link-checker": "^0.7.8",
+    "nodemon": "^3.0.1",
+    "pa11y-ci": "^4.0.0",
+    "playwright-core": "^1.54.2"
   },
   "keywords": [
     "saas",

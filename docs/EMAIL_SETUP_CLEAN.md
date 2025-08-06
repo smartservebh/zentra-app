@@ -8,7 +8,7 @@ Zentra is configured to use SendGrid for email delivery.
 ```env
 SENDGRID_API_KEY=your_sendgrid_api_key_here
 EMAIL_FROM=noreply@zentrahub.pro
-EMAIL_REPLY_TO=support@zentrahub.pro
+EMAIL_REPLY_TO=info@zentrahub.pro
 ```
 
 ## 📧 Using the Email Service
