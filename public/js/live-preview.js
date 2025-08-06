@@ -1,321 +1,401 @@
-// Live Preview JavaScript
+// Live Preview JavaScript - Enhanced
 
-// Get app data from URL parameters
-const urlParams = new URLSearchParams(window.location.search);
-const appId = urlParams.get('id') || generateRandomId();
-const appName = urlParams.get('name') || 'My App';
-const isPublished = urlParams.get('published') === 'true';
+let currentLanguage = 'en';
+let previewTimer;
+let timeRemaining = 3600; // 1 hour in seconds
 
-// Current language
-let currentLanguage = localStorage.getItem('zentra_language') || 'en';
-
-// Initialize
+// Initialize preview
 document.addEventListener('DOMContentLoaded', function() {
     initializePreview();
-    updateLanguage();
+    startExpiryTimer();
+    initializeLanguage();
 });
 
 function initializePreview() {
-    // Set app info
-    document.getElementById('appName').textContent = appName;
-    document.getElementById('appId').textContent = appId;
-    document.getElementById('appIdPreview').textContent = appId;
+    // Get app data from URL or sessionStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const appId = urlParams.get('id') || 'demo';
     
-    // Set preview URL
-    const domain = isPublished ? 'zentrahub.pro/app/' : 'zentrahub.pro/live/';
-    document.getElementById('previewUrl').textContent = domain;
-    
-    // Update badge if published
-    if (isPublished) {
-        const badge = document.querySelector('.preview-badge');
-        badge.textContent = currentLanguage === 'ar' ? 'من��ور' : 'Published';
-        badge.style.background = '#d1fae5';
-        badge.style.color = '#065f46';
-    }
+    // Update preview ID in URL bar
+    document.getElementById('previewId').textContent = appId;
     
     // Load app content
-    loadAppContent();
+    loadAppPreview(appId);
     
-    // Set share URL
-    const shareUrl = `https://zentrahub.pro/${isPublished ? 'app' : 'live'}/${appId}`;
+    // Set up share URL
+    const shareUrl = `${window.location.origin}/preview/${appId}`;
     document.getElementById('shareUrl').value = shareUrl;
     
-    // Set embed code
+    // Set up embed code
     const embedCode = `<iframe src="${shareUrl}" width="100%" height="600" frameborder="0"></iframe>`;
     document.getElementById('embedCode').value = embedCode;
 }
 
-function loadAppContent() {
+function loadAppPreview(appId) {
     const frame = document.getElementById('appPreviewFrame');
     
-    // In production, this would load from the server
-    // For now, we'll load from the generated-apps directory
-    const appUrl = `/generated-apps/${appId}/app.html`;
-    
-    // Check if we have app data in sessionStorage (from editor)
+    // Try to get app data from sessionStorage first
     const appData = sessionStorage.getItem('currentAppData');
-    if (appData && !isPublished) {
-        // Create blob URL for preview
+    if (appData) {
         const blob = new Blob([appData], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
         frame.src = url;
     } else {
-        // Load from server
-        frame.src = appUrl;
+        // Fallback to server endpoint
+        frame.src = `/api/apps/preview/${appId}`;
     }
     
-    // Handle frame load errors
+    // Handle frame load events
+    frame.onload = function() {
+        console.log('App preview loaded successfully');
+    };
+    
     frame.onerror = function() {
-        frame.srcdoc = `
-            <html>
-                <body style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; color: #666;">
-                    <div style="text-align: center;">
-                        <h2>${currentLanguage === 'ar' ? 'التطبيق غير متاح' : 'App Not Available'}</h2>
-                        <p>${currentLanguage === 'ar' ? 'لم يتم العثور على التطبيق أو أنه غير متاح حالياً' : 'App not found or currently unavailable'}</p>
-                    </div>
-                </body>
-            </html>
-        `;
+        console.error('Failed to load app preview');
+        showError('Failed to load app preview');
     };
 }
 
-// Navigation Functions
+function startExpiryTimer() {
+    previewTimer = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        
+        if (timeRemaining <= 0) {
+            clearInterval(previewTimer);
+            showExpiryNotice();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('timeRemaining').textContent = display;
+}
+
+function showExpiryNotice() {
+    const notice = document.querySelector('.preview-notice');
+    notice.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>Preview expired. Please generate a new preview.</span>
+    `;
+    notice.style.background = '#fee2e2';
+    notice.style.borderColor = '#fecaca';
+    notice.style.color = '#991b1b';
+}
+
+// Navigation functions
 function backToEditor() {
-    // Check if we came from dashboard or editor
-    const referrer = document.referrer;
-    if (referrer.includes('dashboard')) {
-        window.location.href = '/dashboard.html';
+    if (document.referrer) {
+        window.history.back();
     } else {
-        window.location.href = '/';
+        window.location.href = '/dashboard.html';
     }
 }
 
-// Share Functions
+// App actions
+function publishApp() {
+    const appId = document.getElementById('previewId').textContent;
+    
+    if (confirm(currentLanguage === 'ar' ? 'هل تريد نشر هذا التطبيق؟' : 'Do you want to publish this app?')) {
+        // Show loading state
+        const btn = event.target.closest('.btn-action');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `
+            <div class="spinner" style="width: 16px; height: 16px; border-width: 2px;"></div>
+            <span>${currentLanguage === 'ar' ? 'جاري النشر...' : 'Publishing...'}</span>
+        `;
+        btn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            showSuccess(currentLanguage === 'ar' ? 'تم نشر التطبيق بنجاح!' : 'App published successfully!');
+        }, 2000);
+    }
+}
+
 function shareApp() {
-    document.getElementById('shareModal').classList.add('show');
+    document.getElementById('shareModal').classList.add('active');
 }
 
 function closeShareModal() {
-    document.getElementById('shareModal').classList.remove('show');
-}
-
-function copyUrl() {
-    const url = `https://zentrahub.pro/${isPublished ? 'app' : 'live'}/${appId}`;
-    copyToClipboard(url);
-    showToast(currentLanguage === 'ar' ? 'تم نسخ الرابط!' : 'URL copied!');
+    document.getElementById('shareModal').classList.remove('active');
 }
 
 function copyShareUrl() {
     const input = document.getElementById('shareUrl');
     input.select();
     document.execCommand('copy');
-    showToast(currentLanguage === 'ar' ? 'تم نسخ الرابط!' : 'URL copied!');
+    
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = currentLanguage === 'ar' ? 'تم النسخ!' : 'Copied!';
+    btn.style.background = '#10b981';
+    
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+    }, 2000);
 }
 
 function copyEmbedCode() {
     const textarea = document.getElementById('embedCode');
     textarea.select();
     document.execCommand('copy');
-    showToast(currentLanguage === 'ar' ? 'تم نسخ كود التضمين!' : 'Embed code copied!');
-}
-
-function shareOnTwitter() {
-    const text = currentLanguage === 'ar' 
-        ? `شاهد تطبيقي الجديد الذي أنشأته باستخدام @ZentraApp!`
-        : `Check out my new app created with @ZentraApp!`;
-    const url = `https://zentrahub.pro/${isPublished ? 'app' : 'live'}/${appId}`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
-}
-
-function shareOnLinkedIn() {
-    const url = `https://zentrahub.pro/${isPublished ? 'app' : 'live'}/${appId}`;
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
-}
-
-function shareOnFacebook() {
-    const url = `https://zentrahub.pro/${isPublished ? 'app' : 'live'}/${appId}`;
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-}
-
-// Publish Functions
-function publishApp() {
-    if (isPublished) {
-        showToast(currentLanguage === 'ar' ? 'التطبيق منشور بالفعل!' : 'App is already published!');
-        return;
-    }
-    document.getElementById('publishModal').classList.add('show');
-}
-
-function closePublishModal() {
-    document.getElementById('publishModal').classList.remove('show');
-}
-
-function confirmPublish() {
-    const publishType = document.querySelector('input[name="publishType"]:checked').value;
-    const makePublic = document.getElementById('makePublic').checked;
-    const enableAnalytics = document.getElementById('enableAnalytics').checked;
     
-    // Show loading state
     const btn = event.target;
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner"></span> Publishing...';
-    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = currentLanguage === 'ar' ? 'تم النسخ!' : 'Copied!';
+    btn.style.background = '#10b981';
     
-    // Simulate API call
     setTimeout(() => {
-        // In production, this would make an API call to publish the app
-        closePublishModal();
-        showToast(currentLanguage === 'ar' ? 'تم نشر التطبيق بنجاح!' : 'App published successfully!');
-        
-        // Reload page as published
-        setTimeout(() => {
-            window.location.href = `?id=${appId}&name=${encodeURIComponent(appName)}&published=true`;
-        }, 1500);
+        btn.textContent = originalText;
+        btn.style.background = '';
     }, 2000);
 }
 
-// Export Functions
-function exportCode() {
-    document.getElementById('exportModal').classList.add('show');
+function shareOnTwitter() {
+    const url = document.getElementById('shareUrl').value;
+    const text = 'Check out this amazing app I created with Zentra!';
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(twitterUrl, '_blank');
 }
 
-function closeExportModal() {
-    document.getElementById('exportModal').classList.remove('show');
+function shareOnLinkedIn() {
+    const url = document.getElementById('shareUrl').value;
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    window.open(linkedinUrl, '_blank');
 }
 
-function exportAsZip() {
-    // In production, this would trigger a download
-    showToast(currentLanguage === 'ar' ? 'جاري تحضير ملف ZIP...' : 'Preparing ZIP file...');
+function shareOnFacebook() {
+    const url = document.getElementById('shareUrl').value;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    window.open(facebookUrl, '_blank');
+}
+
+function toggleFullscreen() {
+    document.body.classList.toggle('fullscreen');
     
-    // Simulate download
+    const btn = event.target.closest('.btn-action');
+    const isFullscreen = document.body.classList.contains('fullscreen');
+    
+    if (isFullscreen) {
+        btn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
+            </svg>
+            <span>${currentLanguage === 'ar' ? 'خروج من ملء الشاشة' : 'Exit Fullscreen'}</span>
+        `;
+    } else {
+        btn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+            <span>${currentLanguage === 'ar' ? 'ملء الشاشة' : 'Fullscreen'}</span>
+        `;
+    }
+}
+
+function exportCode() {
+    const appId = document.getElementById('previewId').textContent;
+    
+    // Show loading state
+    const btn = event.target.closest('.btn-action');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `
+        <div class="spinner" style="width: 16px; height: 16px; border-width: 2px;"></div>
+        <span>${currentLanguage === 'ar' ? 'جاري التصدير...' : 'Exporting...'}</span>
+    `;
+    btn.disabled = true;
+    
+    // Simulate export process
     setTimeout(() => {
-        const link = document.createElement('a');
-        link.href = '#';
-        link.download = `${appId}.zip`;
-        link.click();
-        showToast(currentLanguage === 'ar' ? 'تم تحميل الملف!' : 'File downloaded!');
+        // Create download link
+        const appData = sessionStorage.getItem('currentAppData') || '<html><body><h1>Demo App</h1></body></html>';
+        const blob = new Blob([appData], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `zentra-app-${appId}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        showSuccess(currentLanguage === 'ar' ? 'تم تصدير الكود بنجاح!' : 'Code exported successfully!');
     }, 1500);
 }
 
-function exportToGithub() {
-    // In production, this would open GitHub integration
-    showToast(currentLanguage === 'ar' ? 'فتح تكامل GitHub...' : 'Opening GitHub integration...');
+// Language functions
+function initializeLanguage() {
+    const savedLanguage = localStorage.getItem('zentra_language') || 'en';
+    setLanguage(savedLanguage);
 }
 
-function viewCode() {
-    // Redirect to code viewer
-    window.location.href = `/code-viewer.html?id=${appId}`;
-}
-
-// Fullscreen Function
-function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-        document.body.classList.add('fullscreen');
-    } else {
-        document.exitFullscreen();
-        document.body.classList.remove('fullscreen');
-    }
-}
-
-// Language Toggle
 function toggleLanguage() {
-    currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-    localStorage.setItem('zentra_language', currentLanguage);
-    updateLanguage();
+    const newLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+    setLanguage(newLanguage);
 }
 
-function updateLanguage() {
-    document.documentElement.lang = currentLanguage;
-    document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+function setLanguage(language) {
+    currentLanguage = language;
+    localStorage.setItem('zentra_language', language);
     
-    // Update language button text
-    const langText = document.querySelector('.lang-text');
-    if (langText) {
-        langText.textContent = currentLanguage === 'en' ? 'العربية' : 'English';
-    }
+    // Update HTML attributes
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     
     // Update all translatable elements
-    document.querySelectorAll('[data-en]').forEach(element => {
-        const enText = element.getAttribute('data-en');
-        const arText = element.getAttribute('data-ar');
-        element.textContent = currentLanguage === 'en' ? enText : arText;
+    updateTranslations();
+    
+    // Update language toggle button
+    const langText = document.querySelector('.lang-text');
+    if (langText) {
+        langText.textContent = language === 'en' ? 'العربية' : 'English';
+    }
+}
+
+function updateTranslations() {
+    const elements = document.querySelectorAll('[data-en], [data-ar]');
+    elements.forEach(element => {
+        const text = element.getAttribute(`data-${currentLanguage}`);
+        if (text) {
+            element.textContent = text;
+        }
     });
-    
-    // Update placeholders
-    document.querySelectorAll('[data-en-placeholder]').forEach(element => {
-        const enPlaceholder = element.getAttribute('data-en-placeholder');
-        const arPlaceholder = element.getAttribute('data-ar-placeholder');
-        element.placeholder = currentLanguage === 'en' ? enPlaceholder : arPlaceholder;
-    });
 }
 
-// Utility Functions
-function generateRandomId() {
-    return Math.random().toString(36).substring(2, 9);
+// Utility functions
+function showSuccess(message) {
+    showNotification(message, 'success');
 }
 
-function copyToClipboard(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
+function showError(message) {
+    showNotification(message, 'error');
 }
 
-function showToast(message) {
-    const toast = document.getElementById('successToast');
-    const toastMessage = document.getElementById('toastMessage');
+function showNotification(message, type) {
+    // Remove existing notifications
+    const existing = document.querySelectorAll('.notification');
+    existing.forEach(n => n.remove());
     
-    toastMessage.textContent = message;
-    toast.classList.add('show');
+    // Create notification
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()">&times;</button>
+        </div>
+    `;
     
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : '#ef4444'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 3000;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    notification.querySelector('.notification-content').style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    `;
+    
+    notification.querySelector('button').style.cssText = `
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
     setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
 }
 
-// Handle custom domain input
-document.addEventListener('DOMContentLoaded', function() {
-    const customDomainRadio = document.getElementById('customDomain');
-    const customDomainInput = document.querySelector('.custom-domain-input');
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('shareModal');
+    if (e.target === modal) {
+        closeShareModal();
+    }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Escape to close modal
+    if (e.key === 'Escape') {
+        closeShareModal();
+    }
     
-    if (customDomainRadio && customDomainInput) {
-        customDomainRadio.addEventListener('change', function() {
-            if (this.checked) {
-                customDomainInput.disabled = false;
-                customDomainInput.focus();
-            }
-        });
-        
-        document.getElementById('zentraUrl').addEventListener('change', function() {
-            if (this.checked) {
-                customDomainInput.disabled = true;
-            }
-        });
+    // F11 for fullscreen
+    if (e.key === 'F11') {
+        e.preventDefault();
+        toggleFullscreen();
+    }
+    
+    // Ctrl+S to export
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        exportCode();
     }
 });
 
-// Close modals on outside click
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.classList.remove('show');
-    }
-});
-
-// Handle ESC key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        document.querySelectorAll('.modal.show').forEach(modal => {
-            modal.classList.remove('show');
-        });
-        
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-            document.body.classList.remove('fullscreen');
+// Add CSS for animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
         }
     }
-});
+    
+    .spinner {
+        border: 2px solid transparent;
+        border-top: 2px solid currentColor;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);
