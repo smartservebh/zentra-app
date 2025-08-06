@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentra - Turn Ideas into Apps Instantly</title>
+    <meta name="description" content="Transform your ideas into fully functional web applications using natural language. Support for Arabic and English. No coding required.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/pricing.css">
+    <link rel="stylesheet" href="styles/contact.css">
+    <link rel="stylesheet" href="styles/testimonials.css">
+    <link rel="stylesheet" href="styles/community.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <span class="brand-text">Zentra</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#features" class="nav-link" data-en="Features" data-ar="المميزات">Features</a>
+                <a href="#pricing" class="nav-link" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                <a href="#about" class="nav-link" data-en="About" data-ar="حول">About</a>
+                <div class="nav-actions">
+                    <button class="lang-toggle" onclick="toggleLanguage()">
+                        <span class="lang-text">العربية</span>
+                    </button>
+                    <a href="login.html" class="btn btn-outline" data-en="Login" data-ar="تسجيل الدخول">Login</a>
+                    <a href="register.html" class="btn btn-primary" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-en="Turn Your Ideas Into Apps Instantly" data-ar="حول أفكارك إلى تطبيقات فوراً">
+                    Turn Your Ideas Into Apps Instantly
+                </h1>
+                <p class="hero-subtitle" data-en="Describe your app idea in Arabic or English, and watch Zentra create a fully functional web application in seconds. No coding required." data-ar="اوصف فكرة تطبيقك بالعربية أو الإنجليزية، وشاهد زنترا ينشئ تطبيق ويب عملي بالكامل في ثوانٍ. لا حاجة للبرمجة.">
+                    Describe your app idea in Arabic or English, and watch Zentra create a fully functional web application in seconds. No coding required.
+                </p>
+
+                <!-- Prompt Input -->
+                <div class="prompt-container">
+                    <div class="prompt-box">
+                        <textarea 
+                            id="promptInput" 
+                            placeholder="Describe your app idea... (e.g., 'Create a todo list app with dark mode' or 'أنشئ تطبيق قائمة مهام مع الوضع المظلم')"
+                            data-en-placeholder="Describe your app idea... (e.g., 'Create a todo list app with dark mode')"
+                            data-ar-placeholder="اوصف فكرة تطبيقك... (مثال: 'أنشئ تطبيق قائمة مهام مع الوضع المظلم')"
+                        ></textarea>
+                        <button class="generate-btn" onclick="generateApp()" disabled>
+                            <span class="btn-text" data-en="Generate App" data-ar="إنشاء التطبيق">Generate App</span>
+                            <span class="btn-loading" style="display: none;">
+                                <div class="spinner"></div>
+                                <span data-en="Generating..." data-ar="جاري الإنشاء...">Generating...</span>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="prompt-suggestions">
+                        <span class="suggestions-label" data-en="Try these ideas:" data-ar="جرب هذه الأفكار:">Try these ideas:</span>
+                        <div class="suggestions">
+                            <button class="suggestion" onclick="fillPrompt(this)" data-en="Personal portfolio website" data-ar="موقع شخصي للأعمال">Personal portfolio website</button>
+                            <button class="suggestion" onclick="fillPrompt(this)" data-en="Task management app" data-ar="تطبيق إدارة المهام">Task management app</button>
+                            <button class="suggestion" onclick="fillPrompt(this)" data-en="Weather dashboard" data-ar="لوحة معلومات الطقس">Weather dashboard</button>
+                            <button class="suggestion" onclick="fillPrompt(this)" data-en="Recipe finder app" data-ar="تطبيق البحث عن الوصفات">Recipe finder app</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Preview -->
+                <div class="demo-preview" id="demoPreview" style="display: none;">
+                    <div class="preview-header">
+                        <h3 data-en="Your App Preview" data-ar="معاينة تطبيقك">Your App Preview</h3>
+                        <div class="preview-actions">
+                            <button class="btn btn-outline" onclick="editApp()" data-en="Edit" data-ar="تعديل">Edit</button>
+                            <button class="btn btn-primary" onclick="saveApp()" data-en="Save App" data-ar="حفظ الت��بيق">Save App</button>
+                        </div>
+                    </div>
+                    <div class="preview-frame">
+                        <iframe id="appFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Powerful Features" data-ar="مميزات قوية">Powerful Features</h2>
+                <p data-en="Everything you need to create amazing web applications" data-ar="كل ما تحتاجه لإنشاء تطبيقات ويب مذهلة">Everything you need to create amazing web applications</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-en="AI-Powered Generation" data-ar="إنشاء بالذكاء الاصطناعي">AI-Powered Generation</h3>
+                    <p data-en="Advanced AI understands your requirements and creates fully functional apps" data-ar="ذكاء اصطناعي متقدم يفهم متطلباتك وينشئ تطبيقات عملية بالكامل">Advanced AI understands your requirements and creates fully functional apps</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 data-en="Arabic & English Support" data-ar="دعم العربية والإنجليزية">Arabic & English Support</h3>
+                    <p data-en="Native support for both Arabic and English prompts and interfaces" data-ar="دعم أصلي للمطالبات والواجهات باللغتين العربية والإنجليزية">Native support for both Arabic and English prompts and interfaces</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 data-en="Instant Results" data-ar="نتائج فورية">Instant Results</h3>
+                    <p data-en="Get your working app in seconds, not hours or days" data-ar="احصل على تطبيقك العملي في ثوانٍ، وليس ساعات أو أيام">Get your working app in seconds, not hours or days</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 data-en="Responsive Design" data-ar="تصميم متجاوب">Responsive Design</h3>
+                    <p data-en="All apps work perfectly on desktop, tablet, and mobile devices" data-ar="جميع التطبيقات تعمل بشكل مثالي على أجهزة سطح المكتب والأجهزة اللوحية والهواتف المحمولة">All apps work perfectly on desktop, tablet, and mobile devices</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3 data-en="Instant Publishing" data-ar="نشر فوري">Instant Publishing</h3>
+                    <p data-en="Share your apps with the world using public URLs" data-ar="شارك تطبيقاتك مع العالم باستخدام روابط عامة">Share your apps with the world using public URLs</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 data-en="Modern UI/UX" data-ar="واجهة مستخدم حديثة">Modern UI/UX</h3>
+                    <p data-en="Beautiful, modern interfaces with smooth animations and interactions" data-ar="واجهات جميلة وحديثة مع رسوم متحركة وتفاعلات سلسة">Beautiful, modern interfaces with smooth animations and interactions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Simple, Transparent Pricing" data-ar="أسعار بسيطة وشفافة">Simple, Transparent Pricing</h2>
+                <p data-en="Choose the perfect plan for your needs" data-ar="اختر الخطة المثالية لاحتياجاتك">Choose the perfect plan for your needs</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-amount">0</span>
+                        <span class="price-period" data-en="/mo" data-ar="/شهر">/mo</span>
+                    </div>
+                    <div class="plan-description" data-en="Access all of Zentra's core features at no cost and see what it can do." data-ar="احصل على جميع ميزات زنترا الأساسية مجاناً واكتشف ما يمكنها فعله.">
+                        Access all of Zentra's core features at no cost and see what it can do.
+                    </div>
+                    <div class="plan-credits">
+                        <div class="credit-row">
+                            <strong>25</strong> <span data-en="message credits / month" data-ar="رصيد رسائل / شهر">message credits / month</span>
+                        </div>
+                        <div class="credit-row">
+                            <strong>500</strong> <span data-en="integration credits / month" data-ar="رصيد تكامل / شهر">integration credits / month</span>
+                        </div>
+                    </div>
+                    <a href="register.html" class="btn-plan btn-outline" data-en="Get started" data-ar="ابدأ الآن">Get started</a>
+                    <div class="plan-highlights">
+                        <p data-en="Get access to:" data-ar="احصل على:">Get access to:</p>
+                        <ul>
+                            <li>✔ <span data-en="Analytics dashboard" data-ar="لوحة التحليلات">Analytics dashboard</span></li>
+                            <li>✔ <span data-en="Authentication system" data-ar="نظام المصادقة">Authentication system</span></li>
+                            <li>✔ <span data-en="Database functionality" data-ar="وظائف قاعدة البيانات">Database functionality</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Starter Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-amount">20</span>
+                        <span class="price-period" data-en="/mo" data-ar="/شهر">/mo</span>
+                    </div>
+                    <div class="plan-description" data-en="Build out your first apps for personal projects or early-stage ideas." data-ar="ابنِ تطبيقاتك الأولى للمشاريع الشخصية أو الأفكار المبكرة.">
+                        Build out your first apps for personal projects or early-stage ideas.
+                    </div>
+                    <div class="plan-credits">
+                        <div class="credit-row">
+                            <strong>100</strong> <span data-en="message credits / month" data-ar="رصيد رسائل / شهر">message credits / month</span>
+                        </div>
+                        <div class="credit-row">
+                            <strong>2,000</strong> <span data-en="integration credits / month" data-ar="رصيد تكامل / شهر">integration credits / month</span>
+                        </div>
+                    </div>
+                    <a href="register.html" class="btn-plan btn-outline" data-en="Get started" data-ar="ابدأ الآن">Get started</a>
+                    <div class="plan-highlights">
+                        <p data-en="Get access to:" data-ar="احصل على:">Get access to:</p>
+                        <ul>
+                            <li>✔ <span data-en="Everything in Free plan" data-ar="كل شيء في الخطة المجانية">Everything in Free plan</span></li>
+                            <li>✔ <span data-en="Unlimited app creation" data-ar="إنشاء تطبيقات غير محدود">Unlimited app creation</span></li>
+                            <li>✔ <span data-en="In-app code edits" data-ar="تعديل الكود داخل التطبيق">In-app code edits</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Builder Plan (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge" data-en="Most Popular" data-ar="الأكثر شعبية">Most Popular</div>
+                    <div class="plan-name">Builder</div>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-amount">50</span>
+                        <span class="price-period" data-en="/mo" data-ar="/شهر">/mo</span>
+                    </div>
+                    <div class="plan-description" data-en="Take your idea to the next level with tools to meet your professional needs." data-ar="ارتقِ بفكرتك إلى المستوى التالي مع أدوات تلبي احتياجاتك المهنية.">
+                        Take your idea to the next level with tools to meet your professional needs.
+                    </div>
+                    <div class="plan-credits">
+                        <div class="credit-row">
+                            <strong>250</strong> <span data-en="message credits / month" data-ar="رصيد رسائل / شهر">message credits / month</span>
+                        </div>
+                        <div class="credit-row">
+                            <strong>10,000</strong> <span data-en="integration credits / month" data-ar="رصيد تكامل / شهر">integration credits / month</span>
+                        </div>
+                    </div>
+                    <a href="register.html" class="btn-plan btn-primary" data-en="Get started" data-ar="ابدأ الآن">Get started</a>
+                    <div class="plan-highlights">
+                        <p data-en="Get access to:" data-ar="احصل على:">Get access to:</p>
+                        <ul>
+                            <li>✔ <span data-en="Everything in Starter plan" data-ar="كل شيء في خطة البداية">Everything in Starter plan</span></li>
+                            <li>✔ <span data-en="Custom domains" data-ar="نطاقات مخصصة">Custom domains</span></li>
+                            <li>✔ <span data-en="Github integration" data-ar="تكامل Github">Github integration</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-amount">100</span>
+                        <span class="price-period" data-en="/mo" data-ar="/شهر">/mo</span>
+                    </div>
+                    <div class="plan-description" data-en="Access advanced tools and support for developing complex applications." data-ar="احصل على أدوات متقدمة ودعم لتطوير تطبيقات معقدة.">
+                        Access advanced tools and support for developing complex applications.
+                    </div>
+                    <div class="plan-credits">
+                        <div class="credit-row">
+                            <strong>500</strong> <span data-en="message credits / month" data-ar="رصيد رسائل / شهر">message credits / month</span>
+                        </div>
+                        <div class="credit-row">
+                            <strong>20,000</strong> <span data-en="integration credits / month" data-ar="رصيد تكامل / شهر">integration credits / month</span>
+                        </div>
+                    </div>
+                    <a href="register.html" class="btn-plan btn-outline" data-en="Get started" data-ar="ابدأ الآن">Get started</a>
+                    <div class="plan-highlights">
+                        <p data-en="Plan highlights:" data-ar="مميزات الخطة:">Plan highlights:</p>
+                        <ul>
+                            <li>✔ <span data-en="Everything in Builder plan" data-ar="كل شيء في خطة البناء">Everything in Builder plan</span></li>
+                            <li>✔ <span data-en="Early access to beta features" data-ar="وصول مبكر للميزات التجريبية">Early access to beta features</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-note">
+                <p data-en="All prices in USD. Cancel anytime." data-ar="جميع الأسعار بالدولار الأمريكي. يمكنك الإلغاء في أي وقت.">
+                    All prices in USD. Cancel anytime.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="What Our Users Say" data-ar="ماذا يقول مستخدمونا">What Our Users Say</h2>
+                <p data-en="Join thousands of satisfied creators building amazing apps" data-ar="انضم إلى آلاف المبدعين الراضين الذين يبنون تطبيقات مذهلة">Join thousands of satisfied creators building amazing apps</p>
+            </div>
+            
+            <div class="testimonials-wrapper">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text" data-en="Zentra changed the way I work! I can now create prototypes in minutes instead of days." data-ar="غيرت زنترا طريقة عملي! يمكنني الآن إنشاء نماذج أولية في دقائق بدلاً من أيام.">
+                                "Zentra changed the way I work! I can now create prototypes in minutes instead of days."
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="Sarah Johnson" class="author-avatar">
+                                <div class="author-info">
+                                    <h4 class="author-name">Sarah Johnson</h4>
+                                    <span class="author-role" data-en="Product Designer" data-ar="مصممة منتجات">Product Designer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text" data-en="Finally, a platform that understands Arabic perfectly! My clients love the apps I build." data-ar="أخيراً، منصة تفهم العربية بشكل مثالي! عملائي يحبون التطبيقات التي أبنيها.">
+                                "Finally, a platform that understands Arabic perfectly! My clients love the apps I build."
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?img=2" alt="Ahmed Hassan" class="author-avatar">
+                                <div class="author-info">
+                                    <h4 class="author-name">Ahmed Hassan</h4>
+                                    <span class="author-role" data-en="Freelance Developer" data-ar="مطور مستقل">Freelance Developer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text" data-en="As a designer, Zentra lets me bring my ideas to life without waiting for developers." data-ar="كمصممة، تتيح لي زنترا تحويل أفكاري إلى واقع دون انتظار المطورين.">
+                                "As a designer, Zentra lets me bring my ideas to life without waiting for developers."
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="Emily Chen" class="author-avatar">
+                                <div class="author-info">
+                                    <h4 class="author-name">Emily Chen</h4>
+                                    <span class="author-role" data-en="UX Designer" data-ar="مصممة تجربة المستخدم">UX Designer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text" data-en="Built my startup's MVP in just 2 hours. Zentra is a game-changer!" data-ar="بنيت النموذج الأولي لشركتي الناشئة في ساعتين فقط. زنترا غيرت قواعد اللعبة!">
+                                "Built my startup's MVP in just 2 hours. Zentra is a game-changer!"
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?img=4" alt="Omar Khalil" class="author-avatar">
+                                <div class="author-info">
+                                    <h4 class="author-name">Omar Khalil</h4>
+                                    <span class="author-role" data-en="Startup Founder" data-ar="مؤسس شركة ناشئة">Startup Founder</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text" data-en="The AI understands exactly what I want. It's like having a developer read my mind!" data-ar="الذكاء الاصطناعي يفهم بالضبط ما أريد. كأن لدي مطور يقرأ أفكاري!">
+                                "The AI understands exactly what I want. It's like having a developer read my mind!"
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?img=5" alt="Lisa Wang" class="author-avatar">
+                                <div class="author-info">
+                                    <h4 class="author-name">Lisa Wang</h4>
+                                    <span class="author-role" data-en="Marketing Manager" data-ar="مديرة تسويق">Marketing Manager</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 6 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text" data-en="Teaching my students app development has never been easier. Thank you Zentra!" data-ar="تعليم طلا��ي تطوير التطبيقات لم يكن أسهل من ذلك. شكراً زنترا!">
+                                "Teaching my students app development has never been easier. Thank you Zentra!"
+                            </p>
+                            <div class="testimonial-author">
+                                <img src="https://i.pravatar.cc/150?img=6" alt="Fatima Al-Rashid" class="author-avatar">
+                                <div class="author-info">
+                                    <h4 class="author-name">Fatima Al-Rashid</h4>
+                                    <span class="author-role" data-en="Computer Science Teacher" data-ar="معلمة علوم الحاسوب">Computer Science Teacher</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-en="About Zentra" data-ar="حول زنترا">About Zentra</h2>
+                    <p data-en="Zentra is revolutionizing web development by making it accessible to everyone. Our AI-powered platform understands natural language descriptions in both Arabic and English, transforming your ideas into fully functional web applications instantly." data-ar="زنترا تحدث ثورة في تطوير الويب من خلال جعله متاحاً للجميع. منصتنا المدعومة بالذكاء الاصطناعي تفهم الأوصاف باللغة الطبيعية بالعربية والإنجليزية، وتحول أفكارك إلى تطبيقات ويب عملية بالكامل فوراً.">
+                        Zentra is revolutionizing web development by making it accessible to everyone. Our AI-powered platform understands natural language descriptions in both Arabic and English, transforming your ideas into fully functional web applications instantly.
+                    </p>
+                    <p data-en="Whether you're an entrepreneur, student, designer, or marketer, Zentra empowers you to bring your digital ideas to life without any coding knowledge." data-ar="سواء كنت رائد أعمال أو طالباً أو مصمماً أو مسوقاً، زنترا يمكّنك من إحياء أفكارك الرقمية دون أي معرفة بالبرمجة.">
+                        Whether you're an entrepreneur, student, designer, or marketer, Zentra empowers you to bring your digital ideas to life without any coding knowledge.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label" data-en="Apps Created" data-ar="تطبيق تم إنشاؤه">Apps Created</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5K+</div>
+                        <div class="stat-label" data-en="Happy Users" data-ar="مستخدم سعيد">Happy Users</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label" data-en="Success Rate" data-ar="معدل النجاح">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-icon">📬</div>
+                <h2 data-en="Need help or have a question?" data-ar="هل تحتاج إلى مساعدة أو لديك استفسار؟">Need help or have a question?</h2>
+                <p data-en="You can reach our team anytime through our official emails:" data-ar="فريقنا جاهز دائمًا للرد عليك عبر البريدين الرسميين التاليين:">
+                    You can reach our team anytime through our official emails:
+                </p>
+                
+                <div class="contact-emails">
+                    <div class="email-item">
+                        <a href="mailto:info@zentrahub.pro" class="email-link">
+                            <span class="email-icon">📧</span>
+                            <span class="email-address">info@zentrahub.pro</span>
+                        </a>
+                        <p class="email-desc" data-en="for customer support, help, and feedback" data-ar="للدعم الفني، الأسئلة، والملاحظات">
+                            for customer support, help, and feedback
+                        </p>
+                    </div>
+                    
+                    <div class="email-item">
+                        <a href="mailto:info@zentrahub.pro" class="email-link">
+                            <span class="email-icon">💼</span>
+                            <span class="email-address">info@zentrahub.pro</span>
+                        </a>
+                        <p class="email-desc" data-en="for business inquiries and partnerships" data-ar="للاستفسارات التجارية والشراكات">
+                            for business inquiries and partnerships
+                        </p>
+                    </div>
+                </div>
+                
+                <p class="response-time" data-en="We typically respond within 24 hours." data-ar="نرد عادة خلال 24 ساعة.">
+                    We typically respond within 24 hours.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand">
+                        <a href="index.html" class="brand-link">
+                            <span class="brand-text">Zentra</span>
+                        </a>
+                    </div>
+                    <p data-en="Turn your ideas into apps instantly with AI-powered generation." data-ar="حول أفكارك إلى تطبيقات فوراً مع الإنشاء المدعوم بالذكاء الاصطناعي.">
+                        Turn your ideas into apps instantly with AI-powered generation.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-en="Product" data-ar="المنتج">Product</h4>
+                        <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
+                        <a href="#pricing" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                        <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                        <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+                        <a href="#contact" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</a>
+                        <a href="https://docs.zentrahub.pro" data-en="API Docs" data-ar="وثائق API">API Docs</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+                        <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                        <a href="refund.html" data-en="Refund Policy" data-ar="سياسة الاسترداد">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zentra. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

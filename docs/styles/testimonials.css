@@ -1,0 +1,134 @@
+/* Testimonials Section */
+.testimonials {
+    padding: 80px 0;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.testimonials-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+}
+
+.testimonials-track {
+    display: flex;
+    gap: 30px;
+    animation: scroll 40s linear infinite;
+    width: fit-content;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.testimonials-track:hover {
+    animation-play-state: paused;
+}
+
+.testimonial-card {
+    flex: 0 0 400px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.stars {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.testimonial-text {
+    flex: 1;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.author-role {
+    font-size: 14px;
+    color: #666;
+}
+
+/* RTL Support */
+[dir="rtl"] .testimonials-track {
+    animation-direction: reverse;
+}
+
+[dir="rtl"] .testimonial-author {
+    flex-direction: row-reverse;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonials {
+        padding: 60px 0;
+    }
+    
+    .testimonial-card {
+        flex: 0 0 300px;
+        padding: 25px;
+    }
+    
+    .testimonial-text {
+        font-size: 16px;
+    }
+    
+    .testimonials-track {
+        animation-duration: 30s;
+    }
+}
+
+/* Duplicate cards for seamless loop */
+.testimonials-track::after {
+    content: '';
+    display: flex;
+    gap: 30px;
+}
+
+/* JavaScript will duplicate the cards for infinite scroll */

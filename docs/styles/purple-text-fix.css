@@ -1,0 +1,251 @@
+/* Fix for text visibility on purple backgrounds */
+
+/* Auth Sidebar - Login/Register pages */
+.auth-sidebar,
+.auth-sidebar * {
+    color: white !important;
+}
+
+.auth-sidebar h2,
+.auth-sidebar h3,
+.auth-sidebar h4 {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+.auth-sidebar p {
+    color: white !important;
+    opacity: 0.95 !important;
+}
+
+.auth-sidebar .feature-item p {
+    color: rgba(255, 255, 255, 0.95) !important;
+    opacity: 1 !important;
+}
+
+.auth-sidebar .sidebar-content > p {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+/* Legal CTA Section */
+.legal-cta,
+.legal-cta * {
+    color: white !important;
+}
+
+.legal-cta h2 {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+.legal-cta p {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+.legal-cta .btn {
+    color: #667eea !important;
+    background: white !important;
+}
+
+.legal-cta .btn:hover {
+    background: #f3f4f6 !important;
+}
+
+/* Hero sections with purple gradient */
+.hero-section[style*="background: linear-gradient"],
+.hero-section[style*="667eea"],
+.hero-section[style*="764ba2"] {
+    color: white !important;
+}
+
+.hero-section h1,
+.hero-section h2,
+.hero-section p {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+/* Any element with purple gradient background */
+[style*="background: linear-gradient"][style*="667eea"],
+[style*="background: linear-gradient"][style*="764ba2"],
+[class*="gradient-purple"],
+[class*="bg-purple"] {
+    color: white !important;
+}
+
+[style*="background: linear-gradient"][style*="667eea"] *,
+[style*="background: linear-gradient"][style*="764ba2"] *,
+[class*="gradient-purple"] *,
+[class*="bg-purple"] * {
+    color: white !important;
+}
+
+/* Pricing cards with purple background */
+.pricing-card.popular .plan-header,
+.pricing-card.featured .plan-header {
+    color: white !important;
+}
+
+.pricing-card.popular .plan-header *,
+.pricing-card.featured .plan-header * {
+    color: white !important;
+}
+
+/* Buttons on purple backgrounds */
+.auth-sidebar .btn,
+.legal-cta .btn,
+[style*="background: linear-gradient"][style*="667eea"] .btn,
+[style*="background: linear-gradient"][style*="764ba2"] .btn {
+    background: white !important;
+    color: #667eea !important;
+    border: 2px solid white !important;
+}
+
+.auth-sidebar .btn:hover,
+.legal-cta .btn:hover,
+[style*="background: linear-gradient"][style*="667eea"] .btn:hover,
+[style*="background: linear-gradient"][style*="764ba2"] .btn:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #5a67d8 !important;
+}
+
+/* Language toggle on purple backgrounds */
+.auth-sidebar .lang-btn,
+.language-toggle .lang-btn {
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-sidebar .lang-btn:hover,
+.language-toggle .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Feature icons on purple backgrounds */
+.auth-sidebar .feature-icon {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+/* Links on purple backgrounds */
+.auth-sidebar a,
+.legal-cta a,
+[style*="background: linear-gradient"][style*="667eea"] a,
+[style*="background: linear-gradient"][style*="764ba2"] a {
+    color: white !important;
+    text-decoration: underline;
+    opacity: 1 !important;
+}
+
+.auth-sidebar a:hover,
+.legal-cta a:hover,
+[style*="background: linear-gradient"][style*="667eea"] a:hover,
+[style*="background: linear-gradient"][style*="764ba2"] a:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Forms on purple backgrounds */
+.auth-sidebar input,
+.auth-sidebar select,
+.auth-sidebar textarea {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #1a202c !important;
+    border: 2px solid white !important;
+}
+
+.auth-sidebar input::placeholder,
+.auth-sidebar select::placeholder,
+.auth-sidebar textarea::placeholder {
+    color: #6b7280 !important;
+}
+
+/* Ensure all text elements are visible */
+.auth-sidebar span,
+.auth-sidebar small,
+.auth-sidebar label,
+.auth-sidebar strong,
+.auth-sidebar em,
+.legal-cta span,
+.legal-cta small,
+.legal-cta label,
+.legal-cta strong,
+.legal-cta em {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+/* Fix for any missed elements */
+.gradient-purple *:not(input):not(select):not(textarea),
+.bg-purple *:not(input):not(select):not(textarea),
+[class*="purple"] *:not(input):not(select):not(textarea) {
+    color: white !important;
+}
+
+/* Specific fixes for known issues */
+.auth-sidebar .features-list {
+    color: white !important;
+}
+
+.auth-sidebar .feature-content h4,
+.auth-sidebar .feature-content p {
+    color: white !important;
+}
+
+/* Dashboard purple sections */
+.dashboard-hero[style*="667eea"],
+.dashboard-hero[style*="764ba2"] {
+    color: white !important;
+}
+
+.dashboard-hero h1,
+.dashboard-hero h2,
+.dashboard-hero p {
+    color: white !important;
+}
+
+/* Mobile menu on purple */
+.mobile-menu[style*="667eea"],
+.mobile-menu[style*="764ba2"] {
+    color: white !important;
+}
+
+.mobile-menu a {
+    color: white !important;
+}
+
+/* Notification badges on purple */
+.notification-badge {
+    background: white !important;
+    color: #667eea !important;
+}
+
+/* Progress bars on purple */
+.progress-bar {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.progress-bar-fill {
+    background: white !important;
+}
+
+/* Tooltips on purple */
+.tooltip {
+    background: white !important;
+    color: #1a202c !important;
+}
+
+/* Cards on purple backgrounds */
+.auth-sidebar .card,
+.legal-cta .card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.auth-sidebar .card *,
+.legal-cta .card * {
+    color: white !important;
+}

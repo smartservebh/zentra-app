@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Zentra</title>
+    <meta name="description" content="Share your feedback and help us improve Zentra">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/feedback.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-text">Zentra</a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html#features" class="nav-link" data-en="Features" data-ar="المميزات">Features</a>
+                <a href="pricing.html" class="nav-link" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                <a href="feedback.html" class="nav-link active" data-en="Feedback" data-ar="التغذية الراجعة">Feedback</a>
+                <div class="nav-actions">
+                    <button class="lang-toggle" onclick="toggleLanguage()">
+                        <span class="lang-text">العربية</span>
+                    </button>
+                    <a href="login.html" class="btn btn-outline" data-en="Login" data-ar="تسجيل الدخول">Login</a>
+                    <a href="register.html" class="btn btn-primary" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+                </div>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+        <div class="container">
+            <div class="feedback-header">
+                <h1 data-en="We'd Love Your Feedback" data-ar="نحب أن نسمع رأيك">We'd Love Your Feedback</h1>
+                <p data-en="Help us improve Zentra by sharing your thoughts, ideas, or reporting issues" data-ar="ساعدنا في تحسين زنترا بمشاركة أفكارك أو الإبلاغ عن المشاكل">
+                    Help us improve Zentra by sharing your thoughts, ideas, or reporting issues
+                </p>
+            </div>
+
+            <div class="feedback-content">
+                <!-- Feedback Form -->
+                <div class="feedback-form-card">
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label data-en="Feedback Type" data-ar="نوع التغذية الراجعة">Feedback Type</label>
+                            <select id="feedbackType" required>
+                                <option value="" data-en="Select type..." data-ar="اختر النوع...">Select type...</option>
+                                <option value="bug" data-en="Bug Report" data-ar="تقرير خطأ">Bug Report</option>
+                                <option value="feature" data-en="Feature Request" data-ar="طلب ميزة">Feature Request</option>
+                                <option value="improvement" data-en="Improvement" data-ar="تحسين">Improvement</option>
+                                <option value="complaint" data-en="Complaint" data-ar="شكوى">Complaint</option>
+                                <option value="praise" data-en="Praise" data-ar="إشادة">Praise</option>
+                                <option value="other" data-en="Other" data-ar="أخرى">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-en="Subject" data-ar="الموضوع">Subject</label>
+                            <input type="text" id="feedbackSubject" required 
+                                   placeholder="Brief description of your feedback"
+                                   data-placeholder-en="Brief description of your feedback"
+                                   data-placeholder-ar="وصف موجز لتغذيتك الراجعة">
+                        </div>
+
+                        <div class="form-group">
+                            <label data-en="Priority" data-ar="الأولوية">Priority</label>
+                            <select id="feedbackPriority">
+                                <option value="low" data-en="Low" data-ar="منخفضة">Low</option>
+                                <option value="medium" selected data-en="Medium" data-ar="متوسطة">Medium</option>
+                                <option value="high" data-en="High" data-ar="عالية">High</option>
+                                <option value="critical" data-en="Critical" data-ar="حرجة">Critical</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-en="Your Message" data-ar="رسالتك">Your Message</label>
+                            <textarea id="feedbackMessage" rows="6" required
+                                      placeholder="Please provide detailed information..."
+                                      data-placeholder-en="Please provide detailed information..."
+                                      data-placeholder-ar="يرجى تقديم معلومات مفصلة..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="makePublic">
+                                <span data-en="Make this feedback public (as testimonial)" data-ar="اجعل هذه التغذية الراجعة عامة (كشهادة)">
+                                    Make this feedback public (as testimonial)
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <span data-en="Submit Feedback" data-ar="إرسال التغذية الراجعة">Submit Feedback</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Public Testimonials -->
+                <div class="testimonials-section">
+                    <h2 data-en="What Others Are Saying" data-ar="ماذا يقول الآخرون">What Others Are Saying</h2>
+                    
+                    <div class="testimonials-grid" id="testimonialsGrid">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                            <p data-en="Loading testimonials..." data-ar="جاري تحميل الشهادات...">Loading testimonials...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h3 data-en="Other Ways to Reach Us" data-ar="طرق أخرى للتواصل معنا">Other Ways to Reach Us</h3>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <h4 data-en="Email Support" data-ar="الدعم الفني">Email Support</h4>
+                        <p>support@zentrahub.pro</p>
+                        <small data-en="We respond within 24 hours" data-ar="نرد خلال 24 ساعة">We respond within 24 hours</small>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💬</div>
+                        <h4 data-en="Live Chat" data-ar="الدردشة المباشرة">Live Chat</h4>
+                        <p data-en="Available 9 AM - 6 PM (GMT)" data-ar="متاح من 9 صباحاً - 6 مساءً (توقيت جرينتش)">Available 9 AM - 6 PM (GMT)</p>
+                        <small data-en="Monday to Friday" data-ar="من الاثنين إلى الجمعة">Monday to Friday</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-en="Thank You!" data-ar="شكراً لك!">Thank You!</h2>
+                <button class="modal-close" onclick="closeSuccessModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">✅</div>
+                <div class="success-message">
+                    <h3 data-en="Feedback Submitted Successfully!" data-ar="تم إرسال التغذية الراجعة بنجاح!">Feedback Submitted Successfully!</h3>
+                    <p data-en="Thank you for taking the time to share your thoughts with us. Your feedback is valuable and helps us improve Zentra for everyone." 
+                       data-ar="شكراً لك على الوقت الذي قضيته في مشاركة أفكارك معنا. تغذيتك الراجعة قيمة وتساعدنا في تحسين زنترا للجميع.">
+                        Thank you for taking the time to share your thoughts with us. Your feedback is valuable and helps us improve Zentra for everyone.
+                    </p>
+                    <div class="next-steps">
+                        <h4 data-en="What happens next?" data-ar="ما الذي سيحدث بعد ذلك؟">What happens next?</h4>
+                        <ul>
+                            <li data-en="Our team will review your feedback within 24-48 hours" data-ar="سيراجع فريقنا تغذيتك الراجعة خلال 24-48 ساعة">Our team will review your feedback within 24-48 hours</li>
+                            <li data-en="If needed, we'll reach out for additional information" data-ar="إذا لزم الأمر، سنتواصل معك للحصول على معلومات إضافية">If needed, we'll reach out for additional information</li>
+                            <li data-en="You'll receive updates on any actions taken" data-ar="ستتلقى تحديثات حول أي إجراءات مُتخذة">You'll receive updates on any actions taken</li>
+                        </ul>
+                    </div>
+                </div>
+Modal()">
+                    <span data-en="Continue" data-ar="متابعة">Continue</span>
+                </button>
+            </div>
+        </div>
+    </div>Modal()">
+                    <span data-en="OK" data-ar="حسناً">OK</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand">
+                        <span class="brand-text" style="font-size: 1.5rem; font-weight: 700;">Zentra</span>
+                    </div>
+                    <p data-en="Turn your ideas into apps instantly with AI-powered generation." data-ar="حول أفكارك إلى تطبيقات فوراً مع الإنشاء المدعوم بالذكاء الاصطناعي.">
+                        Turn your ideas into apps instantly with AI-powered generation.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-en="Product" data-ar="المنتج">Product</h4>
+                        <a href="index.html#features" data-en="Features" data-ar="المميزات">Features</a>
+                        <a href="pricing.html" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+                        <a href="dashboard.html" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                        <a href="faq.html" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+                        <a href="feedback.html" data-en="Feedback" data-ar="التغذية الراجعة">Feedback</a>
+                        <a href="#" data-en="API Docs" data-ar="وثائق API">API Docs</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4 data-en="Legal" data-ar="قانوني">Legal</h4>
+                        <a href="privacy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        <a href="terms.html" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                        <a href="refund.html" data-en="Refund Policy" data-ar="سياسة الاسترداد">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zentra. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/feedback.js"></script>
+</body>
+</html>

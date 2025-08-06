@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor - Zentra</title>
+    <meta name="description" content="Build your app with Zentra's AI-powered editor">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/editor.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Editor Header -->
+    <header class="editor-header">
+        <div class="header-left">
+            <a href="/" class="brand-link">
+                <span class="brand-text">Zentra</span>
+            </a>
+            <div class="project-info">
+                <input type="text" id="projectName" class="project-name-input" placeholder="Untitled Project" value="My App">
+                <span class="save-status" id="saveStatus">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span data-en="Saved" data-ar="محفوظ">Saved</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="editor-tabs">
+                <button class="tab active" data-tab="prompt" onclick="switchTab('prompt')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span data-en="Prompt" data-ar="الأمر">Prompt</span>
+                </button>
+                <button class="tab" data-tab="code" onclick="switchTab('code')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    <span data-en="Code" data-ar="الكود">Code</span>
+                </button>
+                <button class="tab" data-tab="settings" onclick="switchTab('settings')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3m16.24-6.36l-4.24 4.24m-6.12 6.12l-4.24 4.24m12.72 0l-4.24-4.24m-6.12-6.12L3.76 3.76"></path>
+                    </svg>
+                    <span data-en="Settings" data-ar="الإعدادات">Settings</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+            
+            <button class="btn-icon" onclick="toggleLanguage()" title="Change language">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+            </button>
+            
+            <button class="btn btn-primary" onclick="previewApp()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span data-en="Preview" data-ar="معاينة">Preview</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Editor Content -->
+    <main class="editor-main">
+        <!-- Prompt Tab -->
+        <div class="tab-content active" id="promptTab">
+            <div class="prompt-editor">
+                <div class="prompt-header">
+                    <h2 data-en="Describe Your App" data-ar="اوصف تطبيقك">Describe Your App</h2>
+                    <p data-en="Tell us what you want to build in natural language" data-ar="أخبرنا ما تريد بناءه باللغة الطبيعية">Tell us what you want to build in natural language</p>
+                </div>
+                
+                <div class="prompt-input-container">
+                    <textarea 
+                        id="promptInput" 
+                        class="prompt-textarea"
+                        placeholder="Describe your app idea... (e.g., 'Create a fitness tracking app with user profiles, workout logging, and progress charts')"
+                        data-en-placeholder="Describe your app idea... (e.g., 'Create a fitness tracking app with user profiles, workout logging, and progress charts')"
+                        data-ar-placeholder="اوصف فكرة تطبيقك... (مثال: 'أنشئ تطبيق تتبع اللياقة البدنية مع ملفات المستخدمين وتسجيل التمارين ومخططات التقدم')"
+                    ></textarea>
+                    
+                    <div class="prompt-actions">
+                        <div class="prompt-suggestions">
+                            <button class="suggestion-chip" onclick="addToPrompt('with modern UI design')">
+                                + modern UI
+                            </button>
+                            <button class="suggestion-chip" onclick="addToPrompt('with user authentication')">
+                                + authentication
+                            </button>
+                            <button class="suggestion-chip" onclick="addToPrompt('with dark mode')">
+                                + dark mode
+                            </button>
+                            <button class="suggestion-chip" onclick="addToPrompt('mobile responsive')">
+                                + responsive
+                            </button>
+                            <button class="suggestion-chip" onclick="addToPrompt('with animations')">
+                                + animations
+                            </button>
+                        </div>
+                        
+                        <button class="btn btn-generate" onclick="generateApp()" id="generateBtn">
+                            <span class="btn-content">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                                <span data-en="Generate App" data-ar="إنشاء التطبيق">Generate App</span>
+                            </span>
+                            <span class="btn-loading" style="display: none;">
+                                <div class="spinner"></div>
+                                <span data-en="Generating..." data-ar="جاري الإنشاء...">Generating...</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="examples-section">
+                    <h3 data-en="Example Prompts" data-ar="أمثلة على الأوامر">Example Prompts</h3>
+                    <div class="examples-grid">
+                        <button class="example-card" onclick="useExample('Create a personal portfolio website with sections for about me, projects, skills, and contact form. Use a modern, minimalist design with smooth scrolling.')">
+                            <div class="example-icon">🎨</div>
+                            <h4>Portfolio Website</h4>
+                            <p>Personal portfolio with projects showcase</p>
+                        </button>
+                        <button class="example-card" onclick="useExample('Build a task management app with drag-and-drop functionality, categories, due dates, and priority levels. Include a dashboard with statistics.')">
+                            <div class="example-icon">✅</div>
+                            <h4>Task Manager</h4>
+                            <p>Organize tasks with drag & drop</p>
+                        </button>
+                        <button class="example-card" onclick="useExample('Create a weather dashboard that shows current weather, 5-day forecast, and weather maps. Include location search and favorite cities.')">
+                            <div class="example-icon">🌤️</div>
+                            <h4>Weather App</h4>
+                            <p>Real-time weather with forecasts</p>
+                        </button>
+                        <button class="example-card" onclick="useExample('Build an e-commerce product page with image gallery, size selector, add to cart functionality, and customer reviews section.')">
+                            <div class="example-icon">🛍️</div>
+                            <h4>E-commerce Page</h4>
+                            <p>Product showcase with cart</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Tab -->
+        <div class="tab-content" id="codeTab">
+            <div class="code-editor">
+                <div class="code-toolbar">
+                    <div class="file-tabs">
+                        <button class="file-tab active" data-file="html" onclick="switchFile('html')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                            </svg>
+                            index.html
+                        </button>
+                        <button class="file-tab" data-file="css" onclick="switchFile('css')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5 3l-.65 3.34h13.59L17.5 8.5H3.92l-.66 3.33h13.59l-.76 3.81-5.48 1.81-4.75-1.81.33-1.64H2.85l-.79 4 7.85 3 9.05-3 1.2-6.03.24-1.21L21.94 3z"/>
+                            </svg>
+                            styles.css
+                        </button>
+                        <button class="file-tab" data-file="js" onclick="switchFile('js')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 3h18v18H3V3m4.73 15.04c.4.85 1.19 1.55 2.54 1.55 1.5 0 2.53-.8 2.53-2.55v-5.78h-1.7V17c0 .86-.35 1.08-.9 1.08-.58 0-.82-.4-1.09-.87l-1.38.83m5.98-.18c.5.98 1.51 1.73 3.09 1.73 1.6 0 2.8-.83 2.8-2.36 0-1.41-.81-2.04-2.25-2.66l-.42-.18c-.73-.31-1.04-.52-1.04-1.02 0-.41.31-.73.81-.73.48 0 .8.21 1.09.73l1.31-.87c-.55-.96-1.33-1.33-2.4-1.33-1.51 0-2.48.96-2.48 2.23 0 1.38.81 2.03 2.03 2.55l.42.18c.78.34 1.24.55 1.24 1.13 0 .48-.45.83-1.15.83-.83 0-1.31-.43-1.67-1.03l-1.38.8z"/>
+                            </svg>
+                            script.js
+                        </button>
+                    </div>
+                    
+                    <div class="code-actions">
+                        <button class="btn-icon" onclick="formatCode()" title="Format code">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="21" y1="10" x2="7" y2="10"></line>
+                                <line x1="21" y1="6" x2="3" y2="6"></line>
+                                <line x1="21" y1="14" x2="3" y2="14"></line>
+                                <line x1="21" y1="18" x2="7" y2="18"></line>
+                            </svg>
+                        </button>
+                        <button class="btn-icon" onclick="copyCode()" title="Copy code">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon" onclick="downloadCode()" title="Download code">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="code-content">
+                    <textarea id="codeEditor" class="code-textarea" spellcheck="false"></textarea>
+                    <div class="code-line-numbers" id="lineNumbers"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settingsTab">
+            <div class="settings-container">
+                <div class="settings-section">
+                    <h3 data-en="App Settings" data-ar="إعدادات التطبيق">App Settings</h3>
+                    
+                    <div class="setting-group">
+                        <label for="appName" data-en="App Name" data-ar="اسم التطبيق">App Name</label>
+                        <input type="text" id="appName" class="setting-input" placeholder="My Awesome App">
+                        <p class="setting-hint" data-en="This will be used in the URL when published" data-ar="سيتم استخدام هذا في الرابط عند النشر">This will be used in the URL when published</p>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="appDescription" data-en="Description" data-ar="الوصف">Description</label>
+                        <textarea id="appDescription" class="setting-textarea" rows="3" placeholder="A brief description of your app"></textarea>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label data-en="Framework" data-ar="إطار العمل">Framework</label>
+                        <select class="setting-select" id="framework">
+                            <option value="vanilla">Vanilla JS</option>
+                            <option value="react">React</option>
+                            <option value="vue">Vue.js</option>
+                            <option value="angular">Angular</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="enableAnalytics" class="toggle-input">
+                            <span class="toggle-slider"></span>
+                            <span data-en="Enable Analytics" data-ar="تفعيل التحليلات">Enable Analytics</span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="makePublic" class="toggle-input" checked>
+                            <span class="toggle-slider"></span>
+                            <span data-en="Make Public" data-ar="جعله عام">Make Public</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3 data-en="SEO Settings" data-ar="إعدادات تحسين محركات البحث">SEO Settings</h3>
+                    
+                    <div class="setting-group">
+                        <label for="metaTitle" data-en="Meta Title" data-ar="عنوان الميتا">Meta Title</label>
+                        <input type="text" id="metaTitle" class="setting-input" placeholder="Page title for search engines">
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="metaDescription" data-en="Meta Description" data-ar="وصف الميتا">Meta Description</label>
+                        <textarea id="metaDescription" class="setting-textarea" rows="2" placeholder="Brief description for search engines"></textarea>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="metaKeywords" data-en="Keywords" data-ar="الكلمات المفتاحية">Keywords</label>
+                        <input type="text" id="metaKeywords" class="setting-input" placeholder="keyword1, keyword2, keyword3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <script src="js/editor.js"></script>
+</body>
+</html>

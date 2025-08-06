@@ -1,0 +1,175 @@
+/* تحسينات تفاعلية للأزرار - Interactive Button Enhancements */
+
+/* تحسين زر تبديل اللغة */
+.lang-toggle:hover {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15) !important;
+}
+
+.lang-toggle:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* تحسين زر الإنشاء */
+.generate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.generate-btn:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.generate-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4) !important;
+}
+
+.generate-btn:active:not(:disabled) {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* تحسين أزرار الاقتراحات */
+.suggestion:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.suggestion:active {
+    transform: translateY(0) !important;
+}
+
+/* تحسين بطاقات المميزات */
+.feature-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+    border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* تحسين بطاقات الأسعار */
+.pricing-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-8px) !important;
+    box-shadow: 0 25px 50px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* تحسين روابط التنقل */
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* تحسين الإحصائيات */
+.stat:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.stat-number {
+    transition: all 0.3s ease !important;
+}
+
+.stat:hover .stat-number {
+    transform: scale(1.1) !important;
+    color: var(--primary-dark) !important;
+}
+
+/* تحسين أزرار الأكشن في معاينة التطبيق */
+.preview-actions .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3) !important;
+}
+
+.preview-actions .btn:active {
+    transform: translateY(0) !important;
+}
+
+/* تحسين أزرار التنقل في الهيدر */
+.nav-actions .btn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25) !important;
+}
+
+.nav-actions .btn:active {
+    transform: translateY(0) !important;
+}
+
+/* تحسين أزرار الفوتر */
+.footer a:hover {
+    color: var(--primary-light) !important;
+    transform: translateX(2px) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* تأثير النبض للأزرار المهمة */
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.6);
+    }
+    100% {
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+}
+
+.generate-btn:not(:disabled) {
+    animation: buttonPulse 3s ease-in-out infinite;
+}
+
+/* تأثير التوهج عند التركيز */
+.btn:focus,
+.lang-toggle:focus,
+.suggestion:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* تحسين الاستجابة للمس على الأجهزة المحمولة */
+@media (hover: none) and (pointer: coarse) {
+    .btn:active,
+    .lang-toggle:active,
+    .suggestion:active {
+        transform: scale(0.98) !important;
+        transition: transform 0.1s ease !important;
+    }
+}
+
+/* تحسين إمكانية الوصول */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .lang-toggle,
+    .suggestion,
+    .feature-card,
+    .pricing-card,
+    .stat {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .btn:hover,
+    .lang-toggle:hover,
+    .suggestion:hover {
+        transform: none !important;
+    }
+}
