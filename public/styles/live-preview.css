@@ -406,9 +406,10 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
-    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+    border-top: 2px solid #10b981;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    color: #1a202c;
     padding: 20px;
     z-index: 3000;
     transform: translateY(100%);
@@ -431,13 +432,16 @@ body {
 .cookie-text h4 {
     margin: 0 0 8px 0;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: #1a202c;
 }
 
 .cookie-text p {
     margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
+    font-size: 0.95rem;
+    color: #2d3748;
+    font-weight: 500;
+    line-height: 1.5;
 }
 
 .cookie-actions {
@@ -447,10 +451,11 @@ body {
 }
 
 .btn-accept, .btn-decline {
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -458,20 +463,25 @@ body {
 .btn-accept {
     background: #10b981;
     color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .btn-accept:hover {
     background: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
 .btn-decline {
     background: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #2d3748;
+    border: 2px solid #e2e8f0;
 }
 
 .btn-decline:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
 }
 
 /* Fullscreen Mode */
