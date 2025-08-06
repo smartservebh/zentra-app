@@ -3,12 +3,15 @@
 let currentLanguage = 'en';
 let previewTimer;
 let timeRemaining = 3600; // 1 hour in seconds
+let isFullscreen = false;
 
 // Initialize preview
 document.addEventListener('DOMContentLoaded', function() {
     initializePreview();
     startExpiryTimer();
     initializeLanguage();
+    initializeCookieConsent();
+    setupKeyboardShortcuts();
 });
 
 function initializePreview() {
@@ -33,27 +36,123 @@ function initializePreview() {
 
 function loadAppPreview(appId) {
     const frame = document.getElementById('appPreviewFrame');
+    const container = document.querySelector('.preview-container');
+    
+    // Show loading state
+    container.innerHTML = `
+        <div class="preview-loading">
+            <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
+            <p>Loading preview...</p>
+        </div>
+    `;
     
     // Try to get app data from sessionStorage first
     const appData = sessionStorage.getItem('currentAppData');
     if (appData) {
         const blob = new Blob([appData], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
-        frame.src = url;
+        
+        // Create new iframe
+        const newFrame = document.createElement('iframe');
+        newFrame.id = 'appPreviewFrame';
+        newFrame.src = url;
+        newFrame.frameBorder = '0';
+        newFrame.allowFullscreen = true;
+        
+        newFrame.onload = function() {
+            container.innerHTML = '';
+            container.appendChild(newFrame);
+            console.log('App preview loaded successfully');
+        };
+        
+        newFrame.onerror = function() {
+            showPreviewError();
+        };
     } else {
-        // Fallback to server endpoint
-        frame.src = `/api/apps/preview/${appId}`;
+        // Create demo app
+        const demoApp = createDemoApp();
+        const blob = new Blob([demoApp], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        
+        const newFrame = document.createElement('iframe');
+        newFrame.id = 'appPreviewFrame';
+        newFrame.src = url;
+        newFrame.frameBorder = '0';
+        newFrame.allowFullscreen = true;
+        
+        newFrame.onload = function() {
+            container.innerHTML = '';
+            container.appendChild(newFrame);
+        };
     }
-    
-    // Handle frame load events
-    frame.onload = function() {
-        console.log('App preview loaded successfully');
-    };
-    
-    frame.onerror = function() {
-        console.error('Failed to load app preview');
-        showError('Failed to load app preview');
-    };
+}
+
+function createDemoApp() {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo App - Zentra</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; max-width: 500px; }
+        h1 { color: #333; margin-bottom: 20px; font-size: 2rem; }
+        p { color: #666; margin-bottom: 30px; line-height: 1.6; }
+        .btn { background: #10b981; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
+        .btn:hover { background: #059669; transform: translateY(-2px); }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 30px; }
+        .feature { padding: 20px; background: #f8f9fa; border-radius: 10px; }
+        .feature-icon { font-size: 2rem; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Demo App</h1>
+        <p>This is a demo application created with Zentra. You can describe any app idea and our AI will generate it instantly!</p>
+        <button class="btn" onclick="alert('This is a demo app created with Zentra!')">Try Demo</button>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast</h3>
+                <p>Generated in seconds</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h3>Beautiful</h3>
+                <p>Modern design</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>Responsive</h3>
+                <p>Works everywhere</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+}
+
+function showPreviewError() {
+    const container = document.querySelector('.preview-container');
+    container.innerHTML = `
+        <div class="preview-error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <h3>Failed to Load Preview</h3>
+            <p>There was an error loading the app preview. Please try again.</p>
+            <button class="retry-btn" onclick="retryPreview()">Retry</button>
+        </div>
+    `;
+}
+
+function retryPreview() {
+    const appId = document.getElementById('previewId').textContent;
+    loadAppPreview(appId);
 }
 
 function startExpiryTimer() {
@@ -182,10 +281,10 @@ function shareOnFacebook() {
 }
 
 function toggleFullscreen() {
-    document.body.classList.toggle('fullscreen');
+    isFullscreen = !isFullscreen;
+    document.body.classList.toggle('fullscreen', isFullscreen);
     
     const btn = event.target.closest('.btn-action');
-    const isFullscreen = document.body.classList.contains('fullscreen');
     
     if (isFullscreen) {
         btn.innerHTML = `
@@ -218,22 +317,27 @@ function exportCode() {
     
     // Simulate export process
     setTimeout(() => {
-        // Create download link
-        const appData = sessionStorage.getItem('currentAppData') || '<html><body><h1>Demo App</h1></body></html>';
-        const blob = new Blob([appData], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `zentra-app-${appId}.html`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        showSuccess(currentLanguage === 'ar' ? 'تم تصدير الكود بنجاح!' : 'Code exported successfully!');
+        try {
+            // Create download link
+            const appData = sessionStorage.getItem('currentAppData') || createDemoApp();
+            const blob = new Blob([appData], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `zentra-app-${appId}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showSuccess(currentLanguage === 'ar' ? 'تم تصدير الكود بنجاح!' : 'Code exported successfully!');
+        } catch (error) {
+            showError(currentLanguage === 'ar' ? 'فشل في تصدير الكود' : 'Failed to export code');
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
     }, 1500);
 }
 
@@ -353,25 +457,82 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Escape to close modal
-    if (e.key === 'Escape') {
-        closeShareModal();
-    }
+// Performance monitoring
+window.addEventListener('load', function() {
+    const loadTime = performance.now();
+    console.log(`Live Preview loaded in ${Math.round(loadTime)}ms`);
     
-    // F11 for fullscreen
-    if (e.key === 'F11') {
-        e.preventDefault();
-        toggleFullscreen();
-    }
+    // Track user interactions
+    let interactionCount = 0;
+    document.addEventListener('click', function() {
+        interactionCount++;
+    });
     
-    // Ctrl+S to export
-    if (e.ctrlKey && e.key === 's') {
-        e.preventDefault();
-        exportCode();
-    }
+    // Log analytics after 30 seconds
+    setTimeout(() => {
+        console.log(`User interactions: ${interactionCount}`);
+    }, 30000);
 });
+
+// Cookie Consent
+function initializeCookieConsent() {
+    const consent = localStorage.getItem('zentra_cookie_consent');
+    if (!consent) {
+        setTimeout(() => {
+            document.getElementById('cookieConsent').classList.add('show');
+        }, 2000);
+    }
+}
+
+function acceptCookies() {
+    localStorage.setItem('zentra_cookie_consent', 'accepted');
+    document.getElementById('cookieConsent').classList.remove('show');
+    showSuccess(currentLanguage === 'ar' ? 'تم قبول ملفات تعريف الارتباط' : 'Cookies accepted');
+}
+
+function declineCookies() {
+    localStorage.setItem('zentra_cookie_consent', 'declined');
+    document.getElementById('cookieConsent').classList.remove('show');
+    showSuccess(currentLanguage === 'ar' ? 'تم رفض ملفات تعريف الارتباط' : 'Cookies declined');
+}
+
+// Keyboard shortcuts
+function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', function(e) {
+        // Escape to close modal or exit fullscreen
+        if (e.key === 'Escape') {
+            if (document.getElementById('shareModal').classList.contains('active')) {
+                closeShareModal();
+            } else if (isFullscreen) {
+                toggleFullscreen();
+            }
+        }
+        
+        // F11 for fullscreen
+        if (e.key === 'F11') {
+            e.preventDefault();
+            toggleFullscreen();
+        }
+        
+        // Ctrl+E to export
+        if (e.ctrlKey && e.key === 'e') {
+            e.preventDefault();
+            exportCode();
+        }
+        
+        // Ctrl+S to share
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            shareApp();
+        }
+        
+        // Ctrl+P to publish
+        if (e.ctrlKey && e.key === 'p') {
+            e.preventDefault();
+            publishApp();
+        }
+    });
+}
 
 // Add CSS for animations
 const style = document.createElement('style');
@@ -397,5 +558,54 @@ style.textContent = `
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
+    
+    .preview-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: #64748b;
+        gap: 16px;
+    }
+    
+    .preview-loading p {
+        margin: 0;
+        font-size: 1.1rem;
+    }
 `;
 document.head.appendChild(style);
+
+// Initialize touch gestures for mobile
+if ('ontouchstart' in window) {
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.changedTouches[0].screenY;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeDistance = touchStartY - touchEndY;
+        const minSwipeDistance = 50;
+        
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+            if (swipeDistance > 0) {
+                // Swipe up - could trigger fullscreen
+                if (!isFullscreen) {
+                    toggleFullscreen();
+                }
+            } else {
+                // Swipe down - could exit fullscreen
+                if (isFullscreen) {
+                    toggleFullscreen();
+                }
+            }
+        }
+    }
+}
