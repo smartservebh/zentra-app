@@ -481,8 +481,9 @@ function showDemoApp() {
     if (previewActions) {
         previewActions.innerHTML = `
             <a href="register.html" class="btn btn-primary" data-en="Sign Up to Save" data-ar="سجل لحفظ التطبيق">Sign Up to Save</a>
+            <button class="btn btn-outline" onclick="window.open(appFrame.src, '_blank')" data-en="Open Full Screen" data-ar="فتح بملء الشاشة">Open Full Screen</button>
         `;
-        zentra.updateTranslations();
+        updateTranslations();
     }
 }
 

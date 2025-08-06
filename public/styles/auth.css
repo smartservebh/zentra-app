@@ -49,9 +49,10 @@
 }
 
 .auth-header p {
-    color: var(--text-secondary);
+    color: #2d3748;
     font-size: 1rem;
     line-height: 1.6;
+    font-weight: 500;
 }
 
 /* Form Styles */
@@ -156,7 +157,8 @@
     gap: var(--spacing-sm);
     cursor: pointer;
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: #2d3748;
+    font-weight: 500;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -262,8 +264,9 @@
 }
 
 .auth-footer p {
-    color: var(--text-secondary);
+    color: #2d3748;
     font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .auth-footer a {
@@ -284,8 +287,8 @@
 
 /* Sidebar */
 .auth-sidebar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, #e6fff5 100%);
+    color: #1a202c;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,7 +325,8 @@
     font-size: 1.125rem;
     line-height: 1.6;
     margin-bottom: var(--spacing-3xl);
-    opacity: 0.9;
+    color: #2d3748;
+    font-weight: 500;
 }
 
 .features-list {
@@ -350,8 +354,9 @@
 
 .feature-item p {
     font-size: 0.875rem;
-    opacity: 0.8;
+    color: #2d3748;
     line-height: 1.5;
+    font-weight: 500;
 }
 
 /* Language Toggle */
@@ -368,20 +373,21 @@
 }
 
 .lang-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #047857;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-size: 0.875rem;
     cursor: pointer;
     transition: all var(--transition-fast);
-    backdrop-filter: blur(10px);
 }
 
 .lang-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 /* Responsive Design */

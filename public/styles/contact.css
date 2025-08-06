@@ -2,7 +2,7 @@
 
 .contact-section {
     padding: 80px 0;
-    background: #ffffff;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
     text-align: center;
 }
 
@@ -25,7 +25,7 @@
 
 .contact-section > .container > .contact-content > p {
     font-size: 1.1rem;
-    color: #718096;
+    color: #2d3748;
     margin-bottom: 40px;
 }
 
@@ -38,16 +38,17 @@
 }
 
 .email-item {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    border: 1px solid #c6f6d5;
     border-radius: 12px;
     padding: 25px;
     transition: all 0.3s ease;
 }
 
 .email-item:hover {
-    background: #f1f3f5;
+    background: linear-gradient(135deg, #e6fffa 0%, #c6f6d5 100%);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
 }
 
 .email-link {
@@ -66,23 +67,23 @@
 .email-address {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #667eea;
+    color: #059669;
     transition: color 0.3s ease;
 }
 
 .email-link:hover .email-address {
-    color: #5a67d8;
+    color: #047857;
 }
 
 .email-desc {
     font-size: 0.95rem;
-    color: #718096;
+    color: #2d3748;
     margin: 0;
 }
 
 .response-time {
     font-size: 1rem;
-    color: #4a5568;
+    color: #2d3748;
     font-weight: 500;
 }
 
